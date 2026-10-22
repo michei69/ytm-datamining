@@ -18,18 +18,42 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Restore previous client source snapshot
+        id: snapshot-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .cache/scripts
+          key: ytm-scripts-${{ hashFiles('versions.json') }}
+          restore-keys: |
+            ytm-scripts-
+
       - run: node --test scripts/check.test.mjs
 
-      - run: node scripts/check.mjs
+      - id: check
+        run: node scripts/check.mjs
         env:
+          OPENAI_COMPLETIONS_URL: ${{ secrets.OPENAI_COMPLETIONS_URL || vars.OPENAI_COMPLETIONS_URL }}
+          OPENAI_COMPLETIONS_ENDPOINT: ${{ secrets.OPENAI_COMPLETIONS_ENDPOINT || vars.OPENAI_COMPLETIONS_ENDPOINT }}
+          OPENAI_ENDPOINT: ${{ secrets.OPENAI_ENDPOINT || vars.OPENAI_ENDPOINT }}
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL || vars.OPENAI_BASE_URL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || secrets.OPENAI_KEY }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL || vars.OPENAI_MODEL }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          FLAG_REMOVAL_MISSES: ${{ vars.FLAG_REMOVAL_MISSES || 3 }}
+
+      - name: Save current client source snapshot
+        if: success() && steps.check.outputs.snapshot_changed == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .cache/scripts
+          key: ytm-scripts-${{ hashFiles('versions.json') }}-${{ github.run_id }}
 
       - name: Commit changes
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add flags.json versions.json
+          git add flags.json flag-state.json versions.json changelog.md
           if ! git diff --cached --quiet; then
-            git commit -m 'chore: update flags and client versions'
+            git commit -m 'chore: update flags, versions, and changelog'
             git push
           fi
