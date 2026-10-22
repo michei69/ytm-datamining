@@ -3583,5 +3583,15 @@
     "requires_restart": false,
     "family": "misc",
     "description": "List of span types included in tracing output."
-  }
+  },
+  "endemic_high_ccv_smearing_allowed_video_ids": {},
+  "music_web_disable_empty_downloaded_playlist_playback": {},
+  "music_web_enable_mweb_landscape_fullscreen": {},
+  "music_web_enable_stacked_icon_nav_buttons": {},
+  "music_web_is_canary": {},
+  "music_web_is_canary_control": {},
+  "web_enable_tracing": {},
+  "web_tracing_export_to_csi": {},
+  "web_tracing_max_spans_per_page": {},
+  "web_tracing_max_spans_per_trace": {}
 }
