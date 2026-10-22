@@ -223,6 +223,7 @@ export class OpenAIHarness {
               return validate(args);
             } catch (error) {
               lastValidationError = error.message;
+              this.logger.warn(`Model submission rejected: ${error.message}`);
               messages.push({
                 role: 'tool',
                 tool_call_id: call.id,

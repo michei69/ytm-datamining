@@ -60,6 +60,10 @@ Optional:
 - `FLAG_REMOVAL_MISSES`: how many consecutive observations must omit a flag
   before it is marked removed. Defaults to `3` to avoid false positives from
   experiment bucketing.
+- `OPENAI_FLAG_BATCH_SIZE`: number of flags analyzed per harness batch. Defaults
+  to `4`; failed multi-flag batches are automatically split and retried.
+- `OPENAI_MAX_STEPS`: maximum tool/submission turns per harness conversation.
+  Defaults to `24`.
 
 ## Local test
 

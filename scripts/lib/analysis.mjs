@@ -468,6 +468,7 @@ FEATURE FLAG RULES
 - Runtime values come from ytcfg and may be booleans, numbers, strings, arrays, or objects.
 - If a flag is only present in server config and has no client-side implementation in the evidence, say it is a server-side experiment/config flag with no observable client behavior rather than inventing UI details.
 - Search the source as needed. Prefer stable element names, labels, API field names, and behavior. Follow the prose rules.
+- The surrounding evidence below is already supplied. Use search_source only when that evidence is genuinely insufficient; do not search once per flag just to confirm what is already shown.
 - Every flag that appears in an indexed source must include at least one evidence item. Copy an EXACT excerpt from the returned snippet; do not paraphrase inside quote. Evidence is for validation and is never published.
 - If no occurrence exists anywhere, use an empty evidence array and be explicit that only server-side configuration evidence exists.
 
@@ -494,18 +495,51 @@ export function makeFlagSubmitTool() {
   };
 }
 
-export async function runFlagHarness({ harness, flags, targets, sources, runtimeFlags = {}, logger = console }) {
+export async function runFlagHarness({
+  harness,
+  flags,
+  targets,
+  sources,
+  runtimeFlags = {},
+  logger = console,
+  batchSize = 4,
+}) {
   const index = buildSourceIndex(sources);
   const tools = [...makeSourceTools(index), makeFlagSubmitTool()];
-  logger.log(`flag harness: analyzing ${targets.length} flag(s) with ${sources ? Object.keys(sources).length : 0} source file(s)`);
-  return harness.run({
-    system:
-      'You are a precise reverse-engineering analyst. You inspect minified client code and return evidence-based experiment-flag metadata as JSON. Never invent unsupported behavior.',
-    user: buildFlagPrompt({ targets, flags, index, runtimeFlags }),
-    tools,
-    submitName: 'submit_flag_metadata',
-    validate: (raw) => validateFlagSubmission(raw, targets, { index }),
-  });
+  logger.log(
+    `flag harness: analyzing ${targets.length} flag(s) in batches of ${batchSize} with ${Object.keys(sources).length} source file(s)`,
+  );
+
+  const analyzeBatch = async (batch) => {
+    logger.log(`flag harness: batch [${batch.map((target) => target.name).join(', ')}]`);
+    try {
+      return await harness.run({
+        system:
+          'You are a precise reverse-engineering analyst. You inspect minified client code and return evidence-based experiment-flag metadata as JSON. Never invent unsupported behavior.',
+        user: buildFlagPrompt({ targets: batch, flags, index, runtimeFlags }),
+        tools,
+        submitName: 'submit_flag_metadata',
+        validate: (raw) => validateFlagSubmission(raw, batch, { index }),
+      });
+    } catch (error) {
+      if (batch.length <= 1) throw error;
+      const midpoint = Math.ceil(batch.length / 2);
+      logger.warn(
+        `flag harness: batch failed (${error.message}); splitting into ${midpoint} + ${batch.length - midpoint} flag(s)`,
+      );
+      const left = await analyzeBatch(batch.slice(0, midpoint));
+      const right = await analyzeBatch(batch.slice(midpoint));
+      return { flags: { ...left.flags, ...right.flags } };
+    }
+  };
+
+  const merged = { flags: {} };
+  const size = Math.max(1, Math.min(8, Number(batchSize) || 4));
+  for (let start = 0; start < targets.length; start += size) {
+    const result = await analyzeBatch(targets.slice(start, start + size));
+    Object.assign(merged.flags, result.flags);
+  }
+  return merged;
 }
 
 function previewText(text, maxChars = 75_000) {

@@ -19,12 +19,13 @@ import {
   buildSourceIndex,
   diffAssets,
   findFlagAnalysisTargets,
+  runFlagHarness,
   searchSources,
   validateFlagSubmission,
   validateVersionSubmission,
 } from './lib/analysis.mjs';
 import { buildChangelogEntry, makeWebhookMessages, prependChangelogEntry } from './lib/changelog.mjs';
-import { OpenAIHarness } from './lib/openai-harness.mjs';
+import { OpenAIHarness, readModelConfig } from './lib/openai-harness.mjs';
 import { loadSnapshot, saveSnapshot } from './lib/snapshot.mjs';
 
 const cfg = {
@@ -353,6 +354,52 @@ test('changelog entries include added and removed flags and version analysis', (
   });
   assert.ok(messages.length > 0);
   assert.ok(messages.every((message) => message.length <= 2_000));
+});
+
+test('readModelConfig expands OPENAI_BASE_URL to a chat completions URL', () => {
+  const config = readModelConfig({
+    OPENAI_BASE_URL: 'https://endpoint.example/v1',
+    OPENAI_API_KEY: 'key',
+    OPENAI_MODEL: 'model',
+  });
+  assert.equal(config.endpoint, 'https://endpoint.example/v1/chat/completions');
+});
+
+test('runFlagHarness batches flags and splits failed batches on the same harness instance', async () => {
+  const names = ['flag_a', 'flag_b', 'flag_c', 'flag_d', 'flag_e', 'flag_f'];
+  const targets = names.map((name) => ({ name, value: {}, requiredFields: ['description'] }));
+  const flags = Object.fromEntries(names.map((name) => [name, {}]));
+  const calls = [];
+  const harness = {
+    async run({ user }) {
+      const batch = names.filter((name) => user.includes(`"name": "${name}"`));
+      calls.push(batch);
+      if (calls.length === 1) throw new Error('simulated overlong batch');
+      return {
+        flags: Object.fromEntries(
+          batch.map((name) => [
+            name,
+            {
+              description: `Description for ${name} behavior.`,
+              requires_restart: false,
+              family: 'misc',
+            },
+          ]),
+        ),
+      };
+    },
+  };
+  const result = await runFlagHarness({
+    harness,
+    flags,
+    targets,
+    sources: { 'base.js': names.map((name) => `F("${name}")`).join(';') },
+    runtimeFlags: {},
+    logger: { log() {}, warn() {} },
+    batchSize: 4,
+  });
+  assert.deepEqual(calls.map((batch) => batch.length), [4, 2, 2, 2]);
+  assert.deepEqual(Object.keys(result.flags).sort(), names);
 });
 
 test('OpenAIHarness executes tools and submits a validated result', async () => {

@@ -40,6 +40,8 @@ jobs:
           OPENAI_MODEL: ${{ secrets.OPENAI_MODEL || vars.OPENAI_MODEL }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           FLAG_REMOVAL_MISSES: ${{ vars.FLAG_REMOVAL_MISSES || 3 }}
+          OPENAI_FLAG_BATCH_SIZE: ${{ vars.OPENAI_FLAG_BATCH_SIZE || 4 }}
+          OPENAI_MAX_STEPS: ${{ vars.OPENAI_MAX_STEPS || 24 }}
 
       - name: Save current client source snapshot
         if: success() && steps.check.outputs.snapshot_changed == 'true'

@@ -406,11 +406,12 @@ export async function run({
 
   // These are deliberately two distinct harness/model instances and the two
   // independent jobs run concurrently.
+  const maxSteps = Math.max(6, Math.min(50, Number(env.OPENAI_MAX_STEPS) || 24));
   const flagHarness = flagNeedsModel
-    ? new OpenAIHarness({ ...modelConfig, fetchImpl, logger })
+    ? new OpenAIHarness({ ...modelConfig, fetchImpl, logger, maxSteps })
     : null;
   const versionHarness = versionNeedsModel
-    ? new OpenAIHarness({ ...modelConfig, fetchImpl, logger })
+    ? new OpenAIHarness({ ...modelConfig, fetchImpl, logger, maxSteps })
     : null;
 
   const [flagAnalysis, versionAnalysis] = await Promise.all([
@@ -420,6 +421,7 @@ export async function run({
           flags: nextFlags,
           targets: flagTargets,
           runtimeFlags: cfg.EXPERIMENT_FLAGS,
+          batchSize: Number(env.OPENAI_FLAG_BATCH_SIZE) || 4,
           sources: {
             'base.js': assets.base,
             'music_polymer_inlined_html.js': assets.polymer,
