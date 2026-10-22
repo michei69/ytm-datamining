@@ -3653,5 +3653,10 @@
     "description": "Server-side experiment/config flag ab_det_apb_b present only in server-provided configuration; no client-side implementation was found in indexed sources so no observable client behavior can be confirmed.",
     "requires_restart": false,
     "family": "misc"
+  },
+  "ab_fk_sk_cl": {
+    "description": "Server-side experiment/config flag with no observable client behavior in the downloaded web client; it is present only in ytcfg EXPERIMENT_FLAGS/serialized flags (true) with no corresponding client-side gating logic found.",
+    "requires_restart": false,
+    "family": "experiments/config infra"
   }
 }
