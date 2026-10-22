@@ -586,7 +586,8 @@
   },
   "enable_zw_ping": {
     "requires_restart": false,
-    "family": "misc"
+    "family": "misc",
+    "description": "When enabled, the app schedules a single delayed ping shortly after the app element attaches (about two seconds later): a no-cors GET to /establish_zw (or /embed/establish_zw for the embedded player, /tv/establish_zw for TV clients) that establishes/refreshes the \"zw\" (zwieback) experiment-bucketing identifier used for server-side experiment assignment. It runs once per app startup/attach and is not tied to any player or queue state. In this session the value is undefined, so the ping is not scheduled."
   },
   "endpoint_behavior_command_executor_fix_killswitch": {
     "description": "Killswitch: when on, disables the fix that suppresses the browser's default navigation while a command endpoint action is executed.",
@@ -2605,15 +2606,18 @@
   },
   "ab_det_apm": {
     "requires_restart": false,
-    "family": "misc"
+    "family": "misc",
+    "description": "Server-side experiment/config flag ab_det_apm present only in server-provided configuration; no client-side implementation was found in indexed sources so no observable client behavior can be confirmed."
   },
   "ab_det_el_h": {
     "requires_restart": false,
-    "family": "misc"
+    "family": "misc",
+    "description": "Server-side experiment/config flag ab_det_el_h present only in server-provided configuration; no client-side implementation was found in indexed sources so no observable client behavior can be confirmed."
   },
   "ab_det_sb_lo": {
     "requires_restart": false,
-    "family": "misc"
+    "family": "misc",
+    "description": "Server-side experiment/config flag ab_det_sb_lo with only server-side configuration evidence; no occurrence was found in indexed client sources so no observable client behavior can be confirmed."
   },
   "action_companion_center_align_description": {
     "requires_restart": false,
@@ -2632,7 +2636,8 @@
   },
   "attmusiw": {
     "requires_restart": false,
-    "family": "misc"
+    "family": "misc",
+    "description": "Turns on \"use BotGuard everywhere\" for attestation. When it is on together with the other attestation flags (attmusi / attmusi_ue), the client's attestation provider is created with the use-BotGuard-everywhere option, so all attestation requests are routed through the BotGuard challenge/refresh flow instead of only selected surfaces; it also enables the startup step that consumes pre-seeded attestation data supplied by the page (a pre-generated attestation token/challenge passed in from the page) to prime challenge refresh. With the flag off, that all-calls BotGuard path and the pre-seeded-token consumption are skipped."
   },
   "cow_optimize_idom_compat": {
     "requires_restart": false,
@@ -2851,7 +2856,8 @@
   },
   "enable_music_css_mss": {
     "requires_restart": false,
-    "family": "misc"
+    "family": "misc",
+    "description": "Server-side experiment/config flag with no observable client behavior in this build: it appears only in the ytcfg EXPERIMENT_FLAGS payload that the page ships to the client, and no indexed client code reads it, so enabling it does not change any UI, styling, or playback behavior that can be observed in the web client itself."
   },
   "enable_music_mweb_profile_menu_app_install_entry": {
     "requires_restart": false,
@@ -2915,11 +2921,13 @@
   },
   "enable_pv_screen_modern_text": {
     "requires_restart": false,
-    "family": "misc"
+    "family": "misc",
+    "description": "Server-side experiment/config flag with no observable client behavior in this build: it is present only in the ytcfg EXPERIMENT_FLAGS payload (and the serialized experiment-flag query string) sent by the server, and no indexed client code reads it, so it does not alter anything the client renders or does; any effect of the flag is decided on the server side."
   },
   "enable_screen_manager_layer_separation": {
     "requires_restart": false,
-    "family": "misc"
+    "family": "misc",
+    "description": "Server-side experiment/config flag with no observable client behavior in this build: it is only delivered as part of the ytcfg EXPERIMENT_FLAGS payload (and the serialized experiment-flag query string), and no indexed client code reads it, so enabling it produces no observable client-side change; whatever layer/screen separation it governs is applied server-side."
   },
   "enable_sdf_dai_h5_midroll": {
     "requires_restart": false,
@@ -2968,7 +2976,8 @@
   },
   "enable_wiz_queue_effect_and_on_init_initial_runs": {
     "requires_restart": false,
-    "family": "queue/playlist/radio"
+    "family": "queue/playlist/radio",
+    "description": "Config flag for the Wiz client rendering framework. In this build it only appears in the client experiment-flag blob (both as a JSON ytcfg entry and in the serialized experiment query string) and is never read by any shipped client code, so it is a server-side / framework-level experiment with no observable YouTube Music UI behavior here. Semantically it governs Wiz framework effect scheduling: routing component effects through an effect queue and allowing initial effect runs to execute during component initialization instead of being deferred."
   },
   "export_networkless_options": {
     "requires_restart": false,
@@ -2977,7 +2986,8 @@
   },
   "fill_single_video_with_notify_to_lasr": {
     "requires_restart": false,
-    "family": "misc"
+    "family": "misc",
+    "description": "Ad-serving config experiment: it appears only in the client's experiment-flag blob (ytcfg JSON and the serialized experiment query string) and no client-side code reads it in this build, so it has no observable client behavior and no effect on YouTube Music UI. Server-side it controls whether an ad request that fills a single video is accompanied by a notify signal to the LASR ad-request pipeline."
   },
   "h5_companion_enable_adcpn_macro_substitution_for_click_pings": {
     "requires_restart": false,
@@ -3151,7 +3161,8 @@
   },
   "mweb_enable_more_chunks": {
     "requires_restart": false,
-    "family": "misc"
+    "family": "misc",
+    "description": "Server-side experiment/config flag shipped in the page's experiment-flag blob (enabled, value true) with no client-side implementation found in the indexed client scripts: no client code reads this key, so it produces no observable client behavior in this build and only affects what the server-side config reports."
   },
   "mweb_fix_cinematic_fullscreen_leak": {
     "requires_restart": false,
@@ -3185,7 +3196,8 @@
   },
   "polymer_bad_build_labels": {
     "requires_restart": false,
-    "family": "player/playback"
+    "family": "player/playback",
+    "description": "Server-side experiment/config flag delivered in the page's experiment-flag blob (enabled, value true) for the Polymer-based player/app runtime; it has no read site in the indexed YouTube Music client scripts, so no observable client behavior (labels, UI, or playback change) can be attributed to it in this build. It exists only as configuration evidence."
   },
   "polymer_verifiy_app_state": {
     "requires_restart": false,
@@ -3214,11 +3226,13 @@
   },
   "roscas": {
     "requires_restart": false,
-    "family": "misc"
+    "family": "misc",
+    "description": "Gates expiry validation of a cached playback attestation challenge. When enabled, the client takes a previously stored attestation challenge response (captured from the player response's attestability.challenge), parses it, decodes the embedded challenge to read its issuance timestamp and lifetime, and treats it as stale once that lifetime has elapsed; a stale challenge is dropped and a fresh one is fetched from the attestation challenge endpoint, while a still-valid one is reused as-is. Attestation tokens (eacrToken / interpreterHash / attestability) are then attached to the unbound attestation engagement request. When disabled, the freshness check short-circuits to \"not expired\", so any stored challenge response is reused without re-requesting a challenge."
   },
   "shell_load_gcf": {
     "requires_restart": false,
-    "family": "player/playback"
+    "family": "player/playback",
+    "description": "Server-side experiment/config flag with no observable client behavior in the indexed client code; it appears only as enabled server configuration with no gated client implementation found."
   },
   "stop_handling_click_for_non_rendering_overlay_layout": {
     "requires_restart": false,
@@ -3262,7 +3276,8 @@
   },
   "web_enable_ab_rsp_cl": {
     "requires_restart": false,
-    "family": "misc"
+    "family": "misc",
+    "description": "Server-side experiment/config flag with no observable client behavior in the indexed client code; it appears only as enabled server configuration with no gated client implementation found."
   },
   "web_enable_error_204": {
     "requires_restart": false,
@@ -3584,14 +3599,59 @@
     "family": "misc",
     "description": "List of span types included in tracing output."
   },
-  "endemic_high_ccv_smearing_allowed_video_ids": {},
-  "music_web_disable_empty_downloaded_playlist_playback": {},
-  "music_web_enable_mweb_landscape_fullscreen": {},
-  "music_web_enable_stacked_icon_nav_buttons": {},
-  "music_web_is_canary": {},
-  "music_web_is_canary_control": {},
-  "web_enable_tracing": {},
-  "web_tracing_export_to_csi": {},
-  "web_tracing_max_spans_per_page": {},
-  "web_tracing_max_spans_per_trace": {}
+  "endemic_high_ccv_smearing_allowed_video_ids": {
+    "description": "List of video IDs (a ytcfg array; also delivered as a bracketed comma-separated experiment string that the client splits and strips of brackets/whitespace) whose live streams are allowed to \"smear\" endemic ad requests. When the currently playing live video's ID is in this list and the companion enable_endemic_high_ccv_smearing_h5 flag is on, the player handles the live-stream break signal with a randomized ad prefetch offset inside a window of endemic_high_ccv_smearing_max_window_seconds instead of the standard livestream-optimization prefetch window, spreading ad-request load over time for very-high-concurrency streams. Videos not listed (or with the companion flag off) fall back to the normal prefetch window.",
+    "requires_restart": false,
+    "family": "player/playback"
+  },
+  "music_web_disable_empty_downloaded_playlist_playback": {
+    "description": "When enabled, a downloaded playlist entity that has zero tracks and is not an auto-generated playlist is treated as non-playable: its play button renders in a disabled state with no play/watch-playlist navigation endpoint (so tapping it starts nothing), and the offline transfer state reported for such an empty downloaded playlist resolves to TRANSFER_STATE_COMPLETE instead of the unknown/pre-transfer state. Non-empty playlists and auto playlists are unaffected. Evaluated per render, so no page reload is required.",
+    "requires_restart": false,
+    "family": "offline/downloads"
+  },
+  "music_web_enable_mweb_landscape_fullscreen": {
+    "description": "Only takes effect on mobile web clients (IS_MOBILE_WEB); on desktop web it is ignored. When enabled, the player installs landscape-orientation handling for mobile web so the player view automatically switches into fullscreen when the device is rotated to landscape (and the corresponding auto-fullscreen state is tracked when leaving landscape). Without it, mobile web users must enter fullscreen manually via the player controls.",
+    "requires_restart": false,
+    "family": "player/playback"
+  },
+  "music_web_enable_stacked_icon_nav_buttons": {
+    "description": "Exposes an \"is stacked icon\" state (reflected as a boolean attribute) on the navigation button renderer and grid renderer custom elements, switching those components from the default icon-and-label arrangement to a stacked layout where the icon sits above the text for navigation buttons and grid items. It affects presentation only, not navigation endpoints or click behavior. Read at component property initialization, so it applies on the next render of those components.",
+    "requires_restart": false,
+    "family": "layout/responsive"
+  },
+  "music_web_is_canary": {
+    "description": "Server-side experiment/config flag with no observable client behavior in this build: it does not appear anywhere in the indexed client scripts and is not present in the page config (its runtime value is undefined). No client code path reads it, so no UI, player, or navigation behavior can be attributed to it; any effect would be applied entirely by the server (e.g., which build or experiment treatment is served).",
+    "requires_restart": false,
+    "family": "experiments/config infra"
+  },
+  "music_web_is_canary_control": {
+    "description": "Server-side experiment/config flag with no observable client behavior: it is not read anywhere in the indexed YouTube Music client scripts or the raw page config. Nothing in the client code consumes this value (the client derives its canary state separately, from the CLIENT_CANARY_STATE page config value and the client-version suffix, not from this flag), so no UI, playback, or request behavior can be attributed to it in this build.",
+    "requires_restart": false,
+    "family": "experiments/config infra"
+  },
+  "web_enable_tracing": {
+    "description": "Server-side experiment/config flag with no observable client behavior in the indexed client code; it appears only as enabled server configuration with no gated client implementation found.",
+    "requires_restart": false,
+    "family": "telemetry/logging"
+  },
+  "web_tracing_export_to_csi": {
+    "description": "Server-side experiment/config flag with no observable client behavior in the indexed client code; it appears only as enabled server configuration with no gated client implementation found.",
+    "requires_restart": false,
+    "family": "telemetry/logging"
+  },
+  "web_tracing_max_spans_per_page": {
+    "description": "Server-side experiment/config flag with no observable client behavior in the indexed client source; only server-side configuration evidence exists. The name and numeric value (2000) suggest it caps how many web tracing performance spans are retained per page, but no client-side enforcement was found.",
+    "requires_restart": false,
+    "family": "telemetry/logging"
+  },
+  "web_tracing_max_spans_per_trace": {
+    "description": "Server-side experiment/config flag with no observable client behavior in the indexed client source; only server-side configuration evidence exists. The name and numeric value (500) suggest it caps how many web tracing performance spans are retained per trace, but no client-side enforcement was found.",
+    "requires_restart": false,
+    "family": "telemetry/logging"
+  },
+  "ab_det_apb_b": {
+    "description": "Server-side experiment/config flag ab_det_apb_b present only in server-provided configuration; no client-side implementation was found in indexed sources so no observable client behavior can be confirmed.",
+    "requires_restart": false,
+    "family": "misc"
+  }
 }
