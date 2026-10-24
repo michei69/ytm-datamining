@@ -2,6 +2,16 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-10-24 15:40:45 UTC
+
+### EXPERIMENT_FLAGS
+**Removed:**
+- `music_web_enable_action_bar_view_model_in_player_overlay`
+- `music_web_enable_like_count_in_player_overlay`
+- `web_enable_signed_in_chunk_prediction`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-10-24 04:02:35 UTC
 
 ### EXPERIMENT_FLAGS
