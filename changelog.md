@@ -2,6 +2,18 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-10-24 04:02:35 UTC
+
+### EXPERIMENT_FLAGS
+**Added:**
+- `html5_force_debug_data_for_client_tmp_logs` — When enabled, ad slot and layout client log payloads include extra debugData details such as slotId, layoutId and entry/fulfillment/expiration trigger data in adClientDataEntry slotData and layoutData; when disabled those debug fields are omitted. _(requires restart: no; family: telemetry/logging)_
+- `web_dedup_ads_lifecycle_scheduled_events` — Server-side experiment/config flag with no observable client behavior in the available sources; it appears only as a boolean in server-provided configuration with no client-side implementation. By name it suggests deduplication of scheduled ads-lifecycle events. _(requires restart: no; family: experiments/config infra)_
+
+**Removed:**
+- `ab_fk_sk_cl`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-10-23 04:10:39 UTC
 
 ### EXPERIMENT_FLAGS
