@@ -3696,6 +3696,7 @@
   "web_dedup_ads_lifecycle_scheduled_events": {
     "description": "Server-side experiment/config flag with no observable client behavior in the available sources; it appears only as a boolean in server-provided configuration with no client-side implementation. By name it suggests deduplication of scheduled ads-lifecycle events.",
     "requires_restart": false,
-    "family": "experiments/config infra"
+    "family": "experiments/config infra",
+    "removed": true
   }
 }

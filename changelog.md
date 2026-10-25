@@ -2,6 +2,14 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-10-25 15:51:31 UTC
+
+### EXPERIMENT_FLAGS
+**Removed:**
+- `web_dedup_ads_lifecycle_scheduled_events`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-10-25 04:04:08 UTC
 
 ### EXPERIMENT_FLAGS
