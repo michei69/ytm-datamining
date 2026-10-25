@@ -2,6 +2,14 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-10-25 04:04:08 UTC
+
+### EXPERIMENT_FLAGS
+**Reappeared:**
+- `ab_fk_sk_cl`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-10-24 15:40:45 UTC
 
 ### EXPERIMENT_FLAGS

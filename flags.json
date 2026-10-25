@@ -3668,8 +3668,7 @@
   "ab_fk_sk_cl": {
     "description": "Server-side experiment/config flag with no observable client behavior in the downloaded web client; it is present only in ytcfg EXPERIMENT_FLAGS/serialized flags (true) with no corresponding client-side gating logic found.",
     "requires_restart": false,
-    "family": "experiments/config infra",
-    "removed": true
+    "family": "experiments/config infra"
   },
   "music_web_enable_action_bar_view_model_in_player_overlay": {
     "description": "ytcfg experiment flag, enabled in this build. It targets rendering of the player overlay's button row (player page / mini-player action area) through the shared action bar view model instead of legacy individual button renderers. No client code in this build reads the flag: the client renders the action bar view model group (yt-video-action-bar-view-model with its segmented like/dislike button child) whenever the server includes that data in the response, so the flag's effect can only be expressed in the server-provided player overlay payload. Treat it as a server-side experiment/config flag with no client-side gate and no independently observable client behavior.",
