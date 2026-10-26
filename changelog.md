@@ -2,6 +2,30 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-10-26 18:32:23 UTC
+
+### Client version
+- INNERTUBE_CLIENT_VERSION: `1.20261020.10.00` → `1.20261020.10.00` _(unchanged)_
+- PLAYER_CLIENT_VERSION: `1.20261020.09.00` → `1.20261021.08.00`
+
+**Summary:** This player build is almost identical to the previous one; the real behavioral deltas are confined to the batched telemetry/logging transport: a new `web_send_vss3_pings` gate for registering the VSS transport, per-event visitor-session routing checks, and reworked handling of send/serialization failures. The release identifier was also bumped to the 20261021_08 build.
+
+**What changed:**
+- **Change 1:** Internal only: the player release identifier used in debug/release reporting (and for parsing the release date) advanced from youtube.player.web_20261020_09_RC00 to youtube.player.web_20261021_08_RC00. It is surfaced only when release-debug reporting is enabled and has no functional effect.
+- **Change 2:** The condition that decides whether the isolated VSS/GEL logging transport is registered (and thus whether QoE/VSS pings go out through that transport) now also honors a new server-controlled flag `web_send_vss3_pings`; previously only `html5_send_qoe_on_gel` and `web_send_vss3_isolated_payload` could enable it. Users whose experiment config sets the new flag will now have their pings routed through the isolated transport.
+- **Change 3:** Telemetry behavior change: when flushing a batch of batched log events, a failure thrown by the networkless send is now funnelled through a single guarded failure handler that reports the error to the error-reporting sink, decrements the outstanding-batch count and invokes the completion callback, so remaining batches are still counted; per-batch serialization failures are reported and skipped and later batches still send. Previously such failures were re-thrown through generic error handling and could short-circuit the remaining batches.
+- **Change 4:** Telemetry routing: with `web_vss_routing_check_all_tier_policies` enabled, the batch flusher now inspects every event payload in the batch (looking for visitor-session-approved/CTN-tagged entries) to decide whether the batch needs the isolated visitor-only transport path, instead of relying only on the batch-level flag. Mixed batches can therefore be routed differently than before.
+- **Change 5:** Internal security/hardening: the worker that serializes batched log events, started from the `WORKER_SERIALIZATION_URL` page variable, is now constructed from a Trusted Types script URL instead of the raw string. What gets serialized and sent is unchanged.
+
+### EXPERIMENT_FLAGS
+**Added:**
+- `wiz_next_ld_fix_client_ve_spec` — Server-side experiment/config flag exposed only through ytcfg EXperimentFlags; no client-side implementation for this key exists in the bundled client code. It belongs to the WIZ next-generation visual-element (VE) logging experiments (siblings include wiz_next_client_ve_parent_fix and wiz_next_tracking_key_prioritize_client_ve_spec) and appears to gate a server-side fix related to logging directives carrying clientVeSpec data. No observable UI or client runtime behavior is controlled by it in this build. _(requires restart: no; family: experiments/config infra)_
+
+**Removed:**
+- `music_web_is_canary`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-10-26 04:08:18 UTC
 
 ### EXPERIMENT_FLAGS

@@ -3633,7 +3633,8 @@
   "music_web_is_canary": {
     "description": "Server-side experiment/config flag with no observable client behavior in this build: it does not appear anywhere in the indexed client scripts and is not present in the page config (its runtime value is undefined). No client code path reads it, so no UI, player, or navigation behavior can be attributed to it; any effect would be applied entirely by the server (e.g., which build or experiment treatment is served).",
     "requires_restart": false,
-    "family": "experiments/config infra"
+    "family": "experiments/config infra",
+    "removed": true
   },
   "music_web_is_canary_control": {
     "description": "Server-side experiment/config flag with no observable client behavior: it is not read anywhere in the indexed YouTube Music client scripts or the raw page config. Nothing in the client code consumes this value (the client derives its canary state separately, from the CLIENT_CANARY_STATE page config value and the client-version suffix, not from this flag), so no UI, playback, or request behavior can be attributed to it in this build.",
@@ -3701,6 +3702,11 @@
   },
   "ab_det_el_h_v2": {
     "description": "Server-side experiment/config flag delivered through ytcfg EXPERIMENT_FLAGS (also mirrored in serializedExperimentFlags as ab_det_el_h_v2=true). No client-side implementation referencing this key exists in the indexed client source, so it produces no observable UI or playback behavior on its own; it is purely an experiment assignment/config value reported to the backend with client requests.",
+    "requires_restart": false,
+    "family": "experiments/config infra"
+  },
+  "wiz_next_ld_fix_client_ve_spec": {
+    "description": "Server-side experiment/config flag exposed only through ytcfg EXperimentFlags; no client-side implementation for this key exists in the bundled client code. It belongs to the WIZ next-generation visual-element (VE) logging experiments (siblings include wiz_next_client_ve_parent_fix and wiz_next_tracking_key_prioritize_client_ve_spec) and appears to gate a server-side fix related to logging directives carrying clientVeSpec data. No observable UI or client runtime behavior is controlled by it in this build.",
     "requires_restart": false,
     "family": "experiments/config infra"
   }

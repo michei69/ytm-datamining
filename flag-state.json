@@ -1,21 +1,13 @@
 {
   "version": 1,
   "flags": {
-    "music_web_is_canary": {
-      "consecutiveMisses": 2,
-      "lastMissingAt": "2026-10-26T04:08:18.780Z"
-    },
-    "ab_fk_sk_cl": {
-      "consecutiveMisses": 2,
-      "lastMissingAt": "2026-10-26T04:08:18.780Z"
-    },
-    "mweb_fix_cinematic_fullscreen_leak": {
+    "web_enable_signed_in_chunk_prediction": {
       "consecutiveMisses": 1,
-      "lastMissingAt": "2026-10-26T04:08:18.780Z"
+      "lastMissingAt": "2026-10-26T18:32:23.221Z"
     },
-    "ab_det_apb_b": {
+    "ab_det_el_h_v2": {
       "consecutiveMisses": 1,
-      "lastMissingAt": "2026-10-26T04:08:18.780Z"
+      "lastMissingAt": "2026-10-26T18:32:23.221Z"
     }
   }
 }
