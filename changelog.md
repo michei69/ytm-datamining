@@ -2,6 +2,20 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-10-26 04:08:18 UTC
+
+### EXPERIMENT_FLAGS
+**Added:**
+- `ab_det_el_h_v2` — Server-side experiment/config flag delivered through ytcfg EXPERIMENT_FLAGS (also mirrored in serializedExperimentFlags as ab_det_el_h_v2=true). No client-side implementation referencing this key exists in the indexed client source, so it produces no observable UI or playback behavior on its own; it is purely an experiment assignment/config value reported to the backend with client requests. _(requires restart: no; family: experiments/config infra)_
+
+**Removed:**
+- `music_web_is_canary_control`
+
+**Reappeared:**
+- `web_enable_signed_in_chunk_prediction`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-10-25 15:51:31 UTC
 
 ### EXPERIMENT_FLAGS

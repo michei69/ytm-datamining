@@ -3638,7 +3638,8 @@
   "music_web_is_canary_control": {
     "description": "Server-side experiment/config flag with no observable client behavior: it is not read anywhere in the indexed YouTube Music client scripts or the raw page config. Nothing in the client code consumes this value (the client derives its canary state separately, from the CLIENT_CANARY_STATE page config value and the client-version suffix, not from this flag), so no UI, playback, or request behavior can be attributed to it in this build.",
     "requires_restart": false,
-    "family": "experiments/config infra"
+    "family": "experiments/config infra",
+    "removed": true
   },
   "web_enable_tracing": {
     "description": "Server-side experiment/config flag with no observable client behavior in the indexed client code; it appears only as enabled server configuration with no gated client implementation found.",
@@ -3685,8 +3686,7 @@
   "web_enable_signed_in_chunk_prediction": {
     "description": "ytcfg experiment/config flag, enabled in this build, and it is also forwarded to the server in the serialized experiment-flag parameter string that accompanies requests. It governs 'chunk prediction' for signed-in users, i.e. speculative prediction/prefetch of the next content chunk based on a load-prediction model. No client module in this build reads the flag, so it is a server-side experiment/config flag: the prediction decision is made from the request context and the flag's effect is not observable as client-side UI or client-side code branching.",
     "requires_restart": false,
-    "family": "service-worker/caching",
-    "removed": true
+    "family": "service-worker/caching"
   },
   "html5_force_debug_data_for_client_tmp_logs": {
     "description": "When enabled, ad slot and layout client log payloads include extra debugData details such as slotId, layoutId and entry/fulfillment/expiration trigger data in adClientDataEntry slotData and layoutData; when disabled those debug fields are omitted.",
@@ -3698,5 +3698,10 @@
     "requires_restart": false,
     "family": "experiments/config infra",
     "removed": true
+  },
+  "ab_det_el_h_v2": {
+    "description": "Server-side experiment/config flag delivered through ytcfg EXPERIMENT_FLAGS (also mirrored in serializedExperimentFlags as ab_det_el_h_v2=true). No client-side implementation referencing this key exists in the indexed client source, so it produces no observable UI or playback behavior on its own; it is purely an experiment assignment/config value reported to the backend with client requests.",
+    "requires_restart": false,
+    "family": "experiments/config infra"
   }
 }
