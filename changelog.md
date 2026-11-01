@@ -2,6 +2,29 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-01 17:48:34 UTC
+
+### Client version
+- INNERTUBE_CLIENT_VERSION: `1.20261020.10.00` → `1.20261027.10.00`
+- PLAYER_CLIENT_VERSION: `1.20261021.08.00` → `1.20261027.11.00`
+
+**Summary:** This build adds experiment-gated ad pause/resume handling and optional badge rendering in shopping detail line items, while advancing player compatibility thresholds and introducing new telemetry event IDs. Other differences appear to be internal implementation churn without clear user-facing effects.
+
+**What changed:**
+- **Experiment-gated ad pause/resume support:** Adds `music_web_enable_ad_pause_fix` handling that separates ad playback state from normal player state, listens for ad-state changes, and enables the play/pause control during ads when the flag is on. With the flag off, the previous behavior of disabling play/pause during ads is preserved.
+- **Shopping content line items can render a badge:** The shopping content line-item view model now renders an optional `viewModel` badge after its text, using a modern badge renderer. This allows product/detail line items supplied by the server to show an inline badge when present.
+- **Player signature and build-age compatibility thresholds updated:** The player’s `signatureTimestamp`/UTC-based compatibility value advances from 20746 to 20753, and the stale-player minimum build check advances to `1008496665`. These changes affect when the client reloads an outdated player for playback compatibility rather than changing normal UI directly.
+- **New telemetry event identifiers:** Adds new logging enum values for TV HTML5 app telemetry and Shorts effect start/end events. This is telemetry infrastructure, not a directly visible UI change.
+
+### EXPERIMENT_FLAGS
+**Added:**
+- `music_web_enable_diwali_2026_statement_banner` — Enables the Diwali 2026 presentation of a server-supplied statement banner in ytmusic-statement-banner-renderer. When true, the banner is rendered full-bleed, its primary and secondary buttons use the large button size, and a promo badge containing an icon and the text "YouTube Music" is inserted above the banner title. It does not create or fetch the banner itself; it only changes how an existing statement banner is displayed. _(requires restart: yes; family: cards/shelves/lockups)_
+
+**Reappeared:**
+- `music_web_is_canary`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-10-26 18:32:23 UTC
 
 ### Client version
