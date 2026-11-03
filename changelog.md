@@ -2,6 +2,34 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-03 19:19:05 UTC
+
+### Client version
+- INNERTUBE_CLIENT_VERSION: `1.20261027.10.00` → `1.20261031.09.00`
+- PLAYER_CLIENT_VERSION: `1.20261027.11.00` → `1.20261101.05.00-canary_control_1.20261102.08.00`
+
+**Summary:** This build is dominated by re-obfuscation/renaming churn (only a handful of net line changes per hunk), with a few real deltas: a new client telemetry event for network-quality transitions, stricter capability gating for hybridized-format changeType playback, an internal refactor of the Innertube request pipeline around a new auth-header provider token, and an updated player build label (the release is a canary-control build).
+
+**What changed:**
+- **New telemetry event: network quality transitions:** The client logging event enum gains a new entry networkQualityTransitionEvent (id 573), appended after the Shorts effect events. This adds a new event type the app can log (alongside the pre-existing networkQualityIntervalEvent), i.e. additional network-quality telemetry plumbing rather than a UI change.
+- **Format hybridization / changeType support is now capability-only:** When deciding whether a played format supports switching (hybridization), the player previously enabled supportsChangeType if the client capability check passed OR the html5_format_hybridization experiment flag was on. The experiment fallback is gone: the capability check (SourceBuffer/ManagedSourceBuffer changeType support) is now the only gate, so clients without changeType no longer get hybridized format switching even when the experiment is enabled.
+- **Internal refactor of Innertube request pipeline and auth headers:** Internally only: the request/response machinery now exposes request building and raw fetching as methods on the network machine (with the existing maw_network_machine_raw_request / all_web_network_machine_raw_request gates delegated through it), and auth headers are supplied by a new dependency-injection token AUTH_HEADERS_PROVIDER_TOKEN that can resolve asynchronously before headers are merged. No request/response field or user-facing behavior change is implied.
+- **Player build label updated (canary-control release):** The embedded player build identifier used for logging and version parsing moved from the previous 2026-10-27 build string to youtube.player.web_20261101_05_RC00, while the served player version is the canary-control build (1.20261101.05.00-canary_control_1.20261102.08.00). This is build/version bookkeeping, not a user-visible behavior change.
+
+### EXPERIMENT_FLAGS
+**Added:**
+- `web_thumbnail_hover_overlay_prevent_mouse_focus` — When enabled, the thumbnail hover overlay layer (the scrim/overlay element that sits on top of video, album, and playlist thumbnails and can act as a button with a tabindex) suppresses the default action of mousedown events on itself. As a result, clicking a thumbnail's hover overlay does not transfer mouse focus onto the overlay button — focus stays where it was, so the overlay is only focusable through keyboard navigation and clicking it does not steal focus or leave a focus ring behind. _(requires restart: no; family: cards/shelves/lockups)_
+
+**Removed:**
+- `ab_det_el_h_v2`
+- `web_enable_signed_in_chunk_prediction`
+
+**Reappeared:**
+- `music_web_enable_action_bar_view_model_in_player_overlay`
+- `music_web_enable_like_count_in_player_overlay`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-01 17:48:34 UTC
 
 ### Client version
