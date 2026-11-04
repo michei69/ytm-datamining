@@ -2,6 +2,35 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-04 05:41:03 UTC
+
+### Client version
+- INNERTUBE_CLIENT_VERSION: `1.20261031.09.00` → `1.20261031.09.00` _(unchanged)_
+- PLAYER_CLIENT_VERSION: `1.20261101.05.00-canary_control_1.20261102.08.00` → `1.20261101.05.00`
+
+**Summary:** The tracked source files (player base.js and the Polymer bundle) are byte-for-byte unchanged between these builds; the only version delta is that the player version string lost its "-canary_control_..." experiment suffix and reverted to the plain release label 1.20261101.05.00. No behavior, UI, network, playback, or telemetry changes are present in the client code.
+
+### EXPERIMENT_FLAGS
+**Added:**
+- `wiz_experiment_ytd_comments_entry_point_header_renderer` — Server-side experiment/config toggle delivered only through the client's experiment config (ytcfg). Its name ties it to the comments entry point header renderer (the comments prompt/teaser header shown above the comments section), but the indexed client bundle contains no reference to this flag, so no observable client-side behavior can be attributed to it from this evidence: the flag value is simply published to the client and any effect is decided server-side (e.g. which response renderer/configuration the backend sends). _(requires restart: no; family: experiments/config infra)_
+- `wiz_next_tracking_key_prioritize_client_ve_spec` — Controls which value the client uses as the logged tracking key when it attaches visualization/impression logging to a rendered element that carries more than one candidate spec. When enabled, the element's clientVeSpec-derived key (built from the response's clientVeSpec fields uiType and elementIndex) is preferred; if no clientVeSpec is present the client falls back to the generic visualization/logging spec, and then to the element's own client-ve-type attribute. When disabled the precedence is reversed, so the generic spec wins over clientVeSpec. Because the key is cached on the element and the cached key is invalidated when it changes, the setting also decides whether an element's visualization/logging registration (visual element) is rebuilt with the new spec on re-render. read per element render/logging pass. _(requires restart: no; family: telemetry/logging)_
+
+**Removed:**
+- `enable_music_web_comments`
+- `kevlar_log_offline_current_network_type_ks`
+- `kevlar_log_updated_time_for_smart_downloads`
+- `mweb_enable_more_chunks`
+- `tvhtml5_use_rta_manager_for_async`
+- `use_command_context_force_click_logging_killswitch`
+- `web_button_or_anchor_click_logging_killswitch`
+- `web_enable_card_view_model_hover_effect`
+- `web_enable_channel_pivot_panel`
+- `web_show_ep_endpoint_response_received`
+- `wiz_next_ld_fix_client_ve_spec`
+- `yt_badge_supported_renderer_ks`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-03 19:19:05 UTC
 
 ### Client version

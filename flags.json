@@ -400,7 +400,8 @@
   "enable_music_web_comments": {
     "description": "Shows the comments section on YouTube Music web player pages.",
     "requires_restart": true,
-    "family": "comments"
+    "family": "comments",
+    "removed": true
   },
   "enable_music_web_create_cairo_collab_playlist_toggle": {
     "description": "Adds the Cairo-style collaborative-playlist toggle when creating a playlist, with an underline-style dropdown error state.",
@@ -820,12 +821,14 @@
   "kevlar_log_offline_current_network_type_ks": {
     "description": "Killswitch: when on, stops attaching the current network type to offline smart-download log events.",
     "requires_restart": false,
-    "family": "telemetry/logging"
+    "family": "telemetry/logging",
+    "removed": true
   },
   "kevlar_log_updated_time_for_smart_downloads": {
     "description": "Logging/network plumbing only, no UI effect (adds smart-download last/next sync timestamps to log events).",
     "requires_restart": false,
-    "family": "telemetry/logging"
+    "family": "telemetry/logging",
+    "removed": true
   },
   "kevlar_mealbar_above_player": {
     "requires_restart": false,
@@ -1651,7 +1654,8 @@
   "tvhtml5_use_rta_manager_for_async": {
     "description": "Routes runAttestation commands through the newer async RTA manager when it is available.",
     "requires_restart": false,
-    "family": "player/playback"
+    "family": "player/playback",
+    "removed": true
   },
   "universal_csi_network_ticks": {
     "requires_restart": false,
@@ -1676,7 +1680,8 @@
   "use_command_context_force_click_logging_killswitch": {
     "description": "Stops forcing click logging on commands dispatched from interaction handlers.",
     "requires_restart": false,
-    "family": "telemetry/logging"
+    "family": "telemetry/logging",
+    "removed": true
   },
   "use_error_suppression": {
     "requires_restart": false,
@@ -1781,7 +1786,8 @@
   "web_button_or_anchor_click_logging_killswitch": {
     "description": "Stops forcing click logging when a button or anchor dispatches its command.",
     "requires_restart": false,
-    "family": "telemetry/logging"
+    "family": "telemetry/logging",
+    "removed": true
   },
   "web_button_or_anchor_list_item": {
     "description": "Renders list items as button/anchor elements and exposes selectable ones as menu items for accessibility.",
@@ -1927,12 +1933,14 @@
   "web_enable_card_view_model_hover_effect": {
     "requires_restart": false,
     "family": "buttons/controls",
-    "description": "Enables the hover effect on card view models, so cards respond visually to pointer hover when they are enabled and have a renderer context."
+    "description": "Enables the hover effect on card view models, so cards respond visually to pointer hover when they are enabled and have a renderer context.",
+    "removed": true
   },
   "web_enable_channel_pivot_panel": {
     "description": "Skips reload-continuation handling for the channel pivot panel's header slot, so it is not rebuilt.",
     "requires_restart": false,
-    "family": "misc"
+    "family": "misc",
+    "removed": true
   },
   "web_enable_command_run_tabindex_fix": {
     "requires_restart": false,
@@ -2399,7 +2407,8 @@
   "web_show_ep_endpoint_response_received": {
     "description": "Registers the endpoint's response-received command so the client acts on the response when it arrives.",
     "requires_restart": false,
-    "family": "navigation/routing"
+    "family": "navigation/routing",
+    "removed": true
   },
   "web_side_rail_dismissible_panels": {
     "requires_restart": false,
@@ -2561,7 +2570,8 @@
   "yt_badge_supported_renderer_ks": {
     "requires_restart": false,
     "family": "cards/shelves/lockups",
-    "description": "Killswitch: when on, computed metadata badges are written to the legacy computed property instead of the copy-on-write property."
+    "description": "Killswitch: when on, computed metadata badges are written to the legacy computed property instead of the copy-on-write property.",
+    "removed": true
   },
   "yt_img_shadow_trigger_show_on_visible": {
     "description": "Triggers image loading when the image element becomes visible, instead of only on prescan/attach.",
@@ -3172,7 +3182,8 @@
   "mweb_enable_more_chunks": {
     "requires_restart": false,
     "family": "misc",
-    "description": "Server-side experiment/config flag shipped in the page's experiment-flag blob (enabled, value true) with no client-side implementation found in the indexed client scripts: no client code reads this key, so it produces no observable client behavior in this build and only affects what the server-side config reports."
+    "description": "Server-side experiment/config flag shipped in the page's experiment-flag blob (enabled, value true) with no client-side implementation found in the indexed client scripts: no client code reads this key, so it produces no observable client behavior in this build and only affects what the server-side config reports.",
+    "removed": true
   },
   "mweb_fix_cinematic_fullscreen_leak": {
     "requires_restart": false,
@@ -3707,7 +3718,8 @@
   "wiz_next_ld_fix_client_ve_spec": {
     "description": "Server-side experiment/config flag exposed only through ytcfg EXperimentFlags; no client-side implementation for this key exists in the bundled client code. It belongs to the WIZ next-generation visual-element (VE) logging experiments (siblings include wiz_next_client_ve_parent_fix and wiz_next_tracking_key_prioritize_client_ve_spec) and appears to gate a server-side fix related to logging directives carrying clientVeSpec data. No observable UI or client runtime behavior is controlled by it in this build.",
     "requires_restart": false,
-    "family": "experiments/config infra"
+    "family": "experiments/config infra",
+    "removed": true
   },
   "music_web_enable_diwali_2026_statement_banner": {
     "description": "Enables the Diwali 2026 presentation of a server-supplied statement banner in ytmusic-statement-banner-renderer. When true, the banner is rendered full-bleed, its primary and secondary buttons use the large button size, and a promo badge containing an icon and the text \"YouTube Music\" is inserted above the banner title. It does not create or fetch the banner itself; it only changes how an existing statement banner is displayed.",
@@ -3718,5 +3730,15 @@
     "description": "When enabled, the thumbnail hover overlay layer (the scrim/overlay element that sits on top of video, album, and playlist thumbnails and can act as a button with a tabindex) suppresses the default action of mousedown events on itself. As a result, clicking a thumbnail's hover overlay does not transfer mouse focus onto the overlay button — focus stays where it was, so the overlay is only focusable through keyboard navigation and clicking it does not steal focus or leave a focus ring behind.",
     "requires_restart": false,
     "family": "cards/shelves/lockups"
+  },
+  "wiz_experiment_ytd_comments_entry_point_header_renderer": {
+    "description": "Server-side experiment/config toggle delivered only through the client's experiment config (ytcfg). Its name ties it to the comments entry point header renderer (the comments prompt/teaser header shown above the comments section), but the indexed client bundle contains no reference to this flag, so no observable client-side behavior can be attributed to it from this evidence: the flag value is simply published to the client and any effect is decided server-side (e.g. which response renderer/configuration the backend sends).",
+    "requires_restart": false,
+    "family": "experiments/config infra"
+  },
+  "wiz_next_tracking_key_prioritize_client_ve_spec": {
+    "description": "Controls which value the client uses as the logged tracking key when it attaches visualization/impression logging to a rendered element that carries more than one candidate spec. When enabled, the element's clientVeSpec-derived key (built from the response's clientVeSpec fields uiType and elementIndex) is preferred; if no clientVeSpec is present the client falls back to the generic visualization/logging spec, and then to the element's own client-ve-type attribute. When disabled the precedence is reversed, so the generic spec wins over clientVeSpec. Because the key is cached on the element and the cached key is invalidated when it changes, the setting also decides whether an element's visualization/logging registration (visual element) is rebuilt with the new spec on re-render. read per element render/logging pass.",
+    "requires_restart": false,
+    "family": "telemetry/logging"
   }
 }
