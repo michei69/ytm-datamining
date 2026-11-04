@@ -2,6 +2,33 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-04 19:36:12 UTC
+
+### Client version
+- INNERTUBE_CLIENT_VERSION: `1.20261031.09.00` → `1.20261031.09.00` _(unchanged)_
+- PLAYER_CLIENT_VERSION: `1.20261101.05.00` → `1.20261102.08.00`
+
+**Summary:** This player rebuild introduces no new user-facing features: ad UI, seek/scrubber UI, media-session integration, captions and playback request parameters behave as before, and no new experiment flags or UI strings were added. The only behavioral adjustment found is a guard on the unified-seek scrubber's reset path; the rest of the change set is internal build churn.
+
+**What changed:**
+- **Change 1:** The embedded player build identifier, which the player parses to derive its build date for version/stats reporting, was updated from the 20261101_05 build to 20261102_08. This is a build-metadata bump rather than a user-visible feature change.
+- **Change 2:** In the seek/scrubber UI state handling, the reset path previously always issued the teardown/reset transition; it is now gated on the scrubber not already being in its initial idle state, matching the component's existing "is not idle" predicate. This avoids redundant reset work and animation teardown (for example when the player is minimized while the scrubber is idle). Internal robustness refinement with no evidenced visible UI change.
+- **Change 3:** No user-visible changes were found in the remaining areas checked: the feature list controlling unified seek (chapter seeking, skip-to-live, speedmaster), the clickable-instream-player/endcap ad flags, skip-button and preview-ad rendering, PO token handling, captions, and media-session metadata/handlers are all unchanged. The remainder of the difference is internal build-level churn.
+
+### EXPERIMENT_FLAGS
+**Removed:**
+- `ab_fk_sk_cl`
+- `disable_clicked_visual_element_in_command_handler`
+- `html5_web_po_experiment_ids`
+- `log_click_with_layer_from_element_in_command_handler`
+- `music_web_is_canary`
+- `mweb_fix_cinematic_fullscreen_leak`
+- `par_bir_key`
+- `refresh_upon_dismiss_channel_creation_from_playlists`
+- `web_enable_arrow_key_navigation_in_dropdown`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-04 05:41:03 UTC
 
 ### Client version
