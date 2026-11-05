@@ -3194,8 +3194,7 @@
   "mweb_fix_cinematic_fullscreen_leak": {
     "requires_restart": false,
     "family": "misc",
-    "description": "Fixes a state/memory leak that occurs when toggling cinematic fullscreen mode on mobile web.",
-    "removed": true
+    "description": "Fixes a state/memory leak that occurs when toggling cinematic fullscreen mode on mobile web."
   },
   "mweb_player_control_on_hover": {
     "requires_restart": false,
@@ -3683,7 +3682,8 @@
   "ab_det_apb_b": {
     "description": "Server-side experiment/config flag ab_det_apb_b present only in server-provided configuration; no client-side implementation was found in indexed sources so no observable client behavior can be confirmed.",
     "requires_restart": false,
-    "family": "misc"
+    "family": "misc",
+    "removed": true
   },
   "ab_fk_sk_cl": {
     "description": "Server-side experiment/config flag with no observable client behavior in the downloaded web client; it is present only in ytcfg EXPERIMENT_FLAGS/serialized flags (true) with no corresponding client-side gating logic found.",
@@ -3749,5 +3749,10 @@
     "description": "Controls which value the client uses as the logged tracking key when it attaches visualization/impression logging to a rendered element that carries more than one candidate spec. When enabled, the element's clientVeSpec-derived key (built from the response's clientVeSpec fields uiType and elementIndex) is preferred; if no clientVeSpec is present the client falls back to the generic visualization/logging spec, and then to the element's own client-ve-type attribute. When disabled the precedence is reversed, so the generic spec wins over clientVeSpec. Because the key is cached on the element and the cached key is invalidated when it changes, the setting also decides whether an element's visualization/logging registration (visual element) is rebuilt with the new spec on re-render. read per element render/logging pass.",
     "requires_restart": false,
     "family": "telemetry/logging"
+  },
+  "enable_mini_app_web_ads": {
+    "description": "Enables ad-specific player handling for YouTube Music when it is running inside the mini-app web view. When true, and the player's web player context is the mini-app ad context (web player context id \"WEB_PLAYER_CONTEXT_CONFIG_ID_KEVLAR_MINI_APP_AD\") and the loaded video is an ad, the player treats that surface the same way it treats a dedicated ad player: the progress bar is bounded by the ad's skippable duration (skippableAdProgressBarDuration from the player response in playerConfig.webPlayerConfig) or the countable seekable range, and when the lead-in unified UI is also enabled it uses the current-time/duration-for-UX values, so ad countdown/progress is shown instead of plain video progress. With the flag off, mini-app ad playback is not given that ad progress treatment.",
+    "requires_restart": false,
+    "family": "player/playback"
   }
 }

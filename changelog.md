@@ -2,6 +2,32 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-05 19:44:28 UTC
+
+### Client version
+- INNERTUBE_CLIENT_VERSION: `1.20261031.09.00` → `1.20261104.00.00`
+- PLAYER_CLIENT_VERSION: `1.20261102.08.00` → `1.20261103.11.00`
+
+**Summary:** The build adds an experiment that switches Music's client-generated toasts to the notification-text component (with focus restoration), updates the player build label, and otherwise shows no other observable behavior changes.
+
+**What changed:**
+- **New experiment: music_web_enable_white_client_toasts reroutes client toasts:** The toast queue manager now checks the experiment `music_web_enable_white_client_toasts`. When enabled it creates a `ytmusic-notification-text-renderer` element instead of `tp-yt-paper-toast`, passes the message as `data.successResponseText`, offsets it above the player bar using the player-bar height, and opens it. When disabled it keeps the legacy paper-toast path. The change is visible only when the experiment is on: toasts render with the notification-text component rather than the paper-toast element.
+- **White-client toast path restores focus on close:** With the new toast experiment enabled, the notification-text toast is configured with `restoreFocusOnClose`, matching the legacy paper-toast behavior so keyboard focus returns to the previously focused element after a toast closes. This is part of the same flagged change rather than a separate toggle.
+- **Player release label advanced to youtube.player.web_20261103_11_RC00:** The player release identifier changed from `youtube.player.web_20261102_08_RC00` to `youtube.player.web_20261103_11_RC00`; the version-parsing helper derives the build date from this string. This is release/telemetry metadata rather than a user-facing feature.
+- **Internal build regeneration of the player and UI code:** Both the player and the UI payload were rebuilt with a different internal encoding/obfuscation scheme and regenerated private names. This is an internal build artifact change; experiment flags, custom element names, CSS custom properties, and request/response fields seen in the diff match the previous build.
+
+### EXPERIMENT_FLAGS
+**Added:**
+- `enable_mini_app_web_ads` — Enables ad-specific player handling for YouTube Music when it is running inside the mini-app web view. When true, and the player's web player context is the mini-app ad context (web player context id "WEB_PLAYER_CONTEXT_CONFIG_ID_KEVLAR_MINI_APP_AD") and the loaded video is an ad, the player treats that surface the same way it treats a dedicated ad player: the progress bar is bounded by the ad's skippable duration (skippableAdProgressBarDuration from the player response in playerConfig.webPlayerConfig) or the countable seekable range, and when the lead-in unified UI is also enabled it uses the current-time/duration-for-UX values, so ad countdown/progress is shown instead of plain video progress. With the flag off, mini-app ad playback is not given that ad progress treatment. _(requires restart: no; family: player/playback)_
+
+**Removed:**
+- `ab_det_apb_b`
+
+**Reappeared:**
+- `mweb_fix_cinematic_fullscreen_leak`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-04 19:36:12 UTC
 
 ### Client version
