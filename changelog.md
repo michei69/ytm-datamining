@@ -2,6 +2,26 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-06 19:08:24 UTC
+
+### Client version
+- INNERTUBE_CLIENT_VERSION: `1.20261104.00.00` → `1.20261104.00.00` _(unchanged)_
+- PLAYER_CLIENT_VERSION: `1.20261103.11.00` → `1.20261104.09.00-canary_experiment_1.20261103.11.00`
+
+**Summary:** The player build was refreshed to the 20261104.09 canary release (from 20261103.11). Apart from the updated build identifier reported in logs and playback URLs, and refreshed internal obfuscation tokens, playback, UI, ads and API handling behave the same as the previous build.
+
+**What changed:**
+- **Player build identifier reported as 20261104.09 canary:** The player version string used for logging and URL/request construction is now 'youtube.player.web_20261104_09_RC00' instead of 'youtube.player.web_20261103_11_RC00'. Version-date parsing is unchanged, so only the reported build identifier differs.
+- **Playback URL and fallback tokens refreshed:** URL-handling constants are the same set (a1.googlevideo.com, /videoplayback, /api/manifest, /file/index.m3u8, playerfallback, signatureCipher, fvip, cmo=td/cmo=pf, mn, sp, rr), but an opaque token bundled with them changed to a new hardcoded value. This is internal parameter churn; the same URL recognition and fallback behavior applies.
+- **No user-visible UI, ads, settings, or telemetry changes:** Behavioral surfaces are unchanged: the clickable-instream-endcap ad experiment 'enable_clickable_instream_player_for_endcap_on_web' with its player-clickable-ad layout container and z-index handling, the 'Ambient mode' versus 'Cinematic lighting' settings label switch gated by 'web_player_use_cinematic_label_2', the client-event name list, and the quality/itag tables. The remainder is internal renaming of temporary identifiers.
+
+### EXPERIMENT_FLAGS
+**Reappeared:**
+- `ab_det_apb_b`
+- `music_web_is_canary`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-05 19:44:28 UTC
 
 ### Client version
