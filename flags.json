@@ -2642,8 +2642,7 @@
   "ab_det_sb_lo": {
     "requires_restart": false,
     "family": "misc",
-    "description": "Server-side experiment/config flag ab_det_sb_lo with only server-side configuration evidence; no occurrence was found in indexed client sources so no observable client behavior can be confirmed.",
-    "removed": true
+    "description": "Server-side experiment/config flag ab_det_sb_lo with only server-side configuration evidence; no occurrence was found in indexed client sources so no observable client behavior can be confirmed."
   },
   "action_companion_center_align_description": {
     "requires_restart": false,
