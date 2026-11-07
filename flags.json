@@ -808,7 +808,8 @@
   "kevlar_keyboard_button_focus": {
     "description": "Enables keyboard-focus styling for buttons and restores focus to the trigger when a popup closes.",
     "requires_restart": false,
-    "family": "buttons/controls"
+    "family": "buttons/controls",
+    "removed": true
   },
   "kevlar_lazy_list_resume_for_autofill": {
     "description": "When a lazy list resumes, only renders a chunk if the list is being autofilled, avoiding a redundant render pass otherwise.",
@@ -3719,14 +3720,12 @@
   "ab_det_el_h_v2": {
     "description": "Server-side experiment/config flag delivered through ytcfg EXPERIMENT_FLAGS (also mirrored in serializedExperimentFlags as ab_det_el_h_v2=true). No client-side implementation referencing this key exists in the indexed client source, so it produces no observable UI or playback behavior on its own; it is purely an experiment assignment/config value reported to the backend with client requests.",
     "requires_restart": false,
-    "family": "experiments/config infra",
-    "removed": true
+    "family": "experiments/config infra"
   },
   "wiz_next_ld_fix_client_ve_spec": {
     "description": "Server-side experiment/config flag exposed only through ytcfg EXperimentFlags; no client-side implementation for this key exists in the bundled client code. It belongs to the WIZ next-generation visual-element (VE) logging experiments (siblings include wiz_next_client_ve_parent_fix and wiz_next_tracking_key_prioritize_client_ve_spec) and appears to gate a server-side fix related to logging directives carrying clientVeSpec data. No observable UI or client runtime behavior is controlled by it in this build.",
     "requires_restart": false,
-    "family": "experiments/config infra",
-    "removed": true
+    "family": "experiments/config infra"
   },
   "music_web_enable_diwali_2026_statement_banner": {
     "description": "Enables the Diwali 2026 presentation of a server-supplied statement banner in ytmusic-statement-banner-renderer. When true, the banner is rendered full-bleed, its primary and secondary buttons use the large button size, and a promo badge containing an icon and the text \"YouTube Music\" is inserted above the banner title. It does not create or fetch the banner itself; it only changes how an existing statement banner is displayed.",

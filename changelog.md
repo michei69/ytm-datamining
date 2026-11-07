@@ -2,6 +2,28 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-07 05:27:17 UTC
+
+### Client version
+- INNERTUBE_CLIENT_VERSION: `1.20261104.00.00` → `1.20261104.00.00` _(unchanged)_
+- PLAYER_CLIENT_VERSION: `1.20261104.09.00-canary_experiment_1.20261103.11.00` → `1.20261103.11.00`
+
+**Summary:** This update rolls the player back from a canary-experiment label (20261104_09) to the RC00 build 20261103_11. Beyond the changed release-version string, the change set shows no detectable difference in UI, playback, network/API behavior, navigation, or experiment logic — behavior appears unchanged with only the build label moving.
+
+**What changed:**
+- **Player release identity rolled back to the 20261103 RC00 build:** The player now identifies itself as youtube.player.web_20261103_11_RC00 instead of the previous canary-experiment label youtube.player.web_20261104_09_RC00. This stable identifier is surfaced in diagnostics/telemetry — the video stats `release_version` field, the feedback `player_release` field, and error/reporting payloads — and reflects a different build lineage rather than a user-visible behavior change.
+- **No change to playback, ads UI, or logging behavior:** Sampled behavior across playback stats reporting, offline/network status handling, touch and mouse interaction handlers, and ad UI rendering (ad badge, ad details line, skip button, interstitial layout, timed pie countdown) is identical in the new build. Error text, DOM class names (e.g. the ytp-ad-details-line style variants), feature-flag checks, and telemetry fields are unchanged, so no user-visible or API behavior change is evident beyond the build label.
+
+### EXPERIMENT_FLAGS
+**Removed:**
+- `kevlar_keyboard_button_focus`
+
+**Reappeared:**
+- `ab_det_el_h_v2`
+- `wiz_next_ld_fix_client_ve_spec`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-06 19:08:24 UTC
 
 ### Client version
