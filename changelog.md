@@ -2,6 +2,20 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-08 17:49:19 UTC
+
+### EXPERIMENT_FLAGS
+**Added:**
+- `music_web_enable_station_ccv` — Server-side experiment/config flag delivered via ytcfg. It is only present in the client configuration payload and has no observable client-side implementation in the indexed sources, so it does not directly control any UI or playback behavior in the web client code; its effect (if any) is applied server-side. _(requires restart: no; family: experiments/config infra)_
+- `wiz_experiment_ytd_page_introduction_renderer` — Server-side experiment/config flag delivered via ytcfg. It is only present in the client configuration payload and has no observable client-side implementation in the indexed sources, so it does not directly control any UI or rendering behavior in the web client code; its effect (if any) is applied server-side. _(requires restart: no; family: experiments/config infra)_
+
+**Removed:**
+- `music_web_enable_action_bar_view_model_in_player_overlay`
+- `music_web_enable_like_count_in_player_overlay`
+- `mweb_fix_cinematic_fullscreen_leak`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-07 17:38:42 UTC
 
 ### EXPERIMENT_FLAGS
