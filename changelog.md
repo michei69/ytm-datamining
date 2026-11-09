@@ -2,6 +2,18 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-09 22:08:34 UTC
+
+### EXPERIMENT_FLAGS
+**Removed:**
+- `ab_det_el_h_v2`
+- `wiz_next_ld_fix_client_ve_spec`
+
+**Reappeared:**
+- `mweb_fix_cinematic_fullscreen_leak`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-08 17:49:19 UTC
 
 ### EXPERIMENT_FLAGS
