@@ -2,6 +2,17 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-10 06:46:55 UTC
+
+### EXPERIMENT_FLAGS
+**Added:**
+- `embeds_web_enable_fullscreen_conversion_ve_logging` — Controls whether the embedded web player tags its conversion/tracking parameters with a fullscreen-specific source visual-element ID. When enabled and the embed player is in fullscreen, it prepends a fixed source VE id (139117) to the comma-joined `source_ve_path` request parameter that is attached to embed video/thumbnail/link URLs alongside `embeds_widget_referrer`, `embeds_referring_euri`, and `embeds_referring_origin`. When disabled, that fullscreen id is not inserted (falling back to other experiment-arm or default source paths), so the behavior is limited to embed conversion analytics logging rather than any user-visible UI change. _(requires restart: no; family: telemetry/logging)_
+
+**Removed:**
+- `ab_det_sb_lo`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-09 22:08:34 UTC
 
 ### EXPERIMENT_FLAGS

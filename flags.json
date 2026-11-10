@@ -2642,7 +2642,8 @@
   "ab_det_sb_lo": {
     "requires_restart": false,
     "family": "misc",
-    "description": "Server-side experiment/config flag ab_det_sb_lo with only server-side configuration evidence; no occurrence was found in indexed client sources so no observable client behavior can be confirmed."
+    "description": "Server-side experiment/config flag ab_det_sb_lo with only server-side configuration evidence; no occurrence was found in indexed client sources so no observable client behavior can be confirmed.",
+    "removed": true
   },
   "action_companion_center_align_description": {
     "requires_restart": false,
@@ -3764,5 +3765,10 @@
     "description": "Server-side experiment/config flag delivered via ytcfg. It is only present in the client configuration payload and has no observable client-side implementation in the indexed sources, so it does not directly control any UI or rendering behavior in the web client code; its effect (if any) is applied server-side.",
     "requires_restart": false,
     "family": "experiments/config infra"
+  },
+  "embeds_web_enable_fullscreen_conversion_ve_logging": {
+    "description": "Controls whether the embedded web player tags its conversion/tracking parameters with a fullscreen-specific source visual-element ID. When enabled and the embed player is in fullscreen, it prepends a fixed source VE id (139117) to the comma-joined `source_ve_path` request parameter that is attached to embed video/thumbnail/link URLs alongside `embeds_widget_referrer`, `embeds_referring_euri`, and `embeds_referring_origin`. When disabled, that fullscreen id is not inserted (falling back to other experiment-arm or default source paths), so the behavior is limited to embed conversion analytics logging rather than any user-visible UI change.",
+    "requires_restart": false,
+    "family": "telemetry/logging"
   }
 }
