@@ -2,6 +2,24 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-10 19:30:21 UTC
+
+### Client version
+- INNERTUBE_CLIENT_VERSION: `1.20261104.00.00` → `1.20261104.00.00` _(unchanged)_
+- PLAYER_CLIENT_VERSION: `1.20261103.11.00` → `1.20261103.11.00-canary_control_1.20261104.09.00`
+
+**Summary:** The tracked source files (base.js and Polymer bundle) are unchanged for this version update; only the build identifier changed.
+
+### EXPERIMENT_FLAGS
+**Removed:**
+- `music_web_enable_station_ccv`
+
+**Reappeared:**
+- `music_web_enable_action_bar_view_model_in_player_overlay`
+- `music_web_enable_like_count_in_player_overlay`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-10 06:46:55 UTC
 
 ### EXPERIMENT_FLAGS
