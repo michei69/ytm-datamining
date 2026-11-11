@@ -2,6 +2,23 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-11 05:35:40 UTC
+
+### Client version
+- INNERTUBE_CLIENT_VERSION: `1.20261104.00.00` → `1.20261104.00.00` _(unchanged)_
+- PLAYER_CLIENT_VERSION: `1.20261103.11.00-canary_control_1.20261104.09.00` → `1.20261103.11.00`
+
+**Summary:** The generated diff for this version update is empty: the player base.js and Polymer bundle are byte-identical to the previous build. The only variation is the version label association (the previous player version carried a canary_control suffix while the current one is the plain release), with no detectable behavior, API, UI, or logging differences in the tracked client source.
+
+### EXPERIMENT_FLAGS
+**Added:**
+- `html5_disable_airplay_button_for_embeds` — When true, embedded players suppress the AirPlay output-picker button: AirPlay target availability is only advertised when the browser exposes WebKit playback target events AND the player instance is not an embed running with this flag enabled, so embeds lose the AirPlay device picker entirely. When false, embeds keep offering AirPlay device selection. _(requires restart: no; family: player/playback)_
+
+**Reappeared:**
+- `music_web_is_canary_control`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-10 19:30:21 UTC
 
 ### Client version

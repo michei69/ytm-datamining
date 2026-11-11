@@ -3656,8 +3656,7 @@
   "music_web_is_canary_control": {
     "description": "Server-side experiment/config flag with no observable client behavior: it is not read anywhere in the indexed YouTube Music client scripts or the raw page config. Nothing in the client code consumes this value (the client derives its canary state separately, from the CLIENT_CANARY_STATE page config value and the client-version suffix, not from this flag), so no UI, playback, or request behavior can be attributed to it in this build.",
     "requires_restart": false,
-    "family": "experiments/config infra",
-    "removed": true
+    "family": "experiments/config infra"
   },
   "web_enable_tracing": {
     "description": "Server-side experiment/config flag with no observable client behavior in the indexed client code; it appears only as enabled server configuration with no gated client implementation found.",
@@ -3769,5 +3768,10 @@
     "description": "Controls whether the embedded web player tags its conversion/tracking parameters with a fullscreen-specific source visual-element ID. When enabled and the embed player is in fullscreen, it prepends a fixed source VE id (139117) to the comma-joined `source_ve_path` request parameter that is attached to embed video/thumbnail/link URLs alongside `embeds_widget_referrer`, `embeds_referring_euri`, and `embeds_referring_origin`. When disabled, that fullscreen id is not inserted (falling back to other experiment-arm or default source paths), so the behavior is limited to embed conversion analytics logging rather than any user-visible UI change.",
     "requires_restart": false,
     "family": "telemetry/logging"
+  },
+  "html5_disable_airplay_button_for_embeds": {
+    "description": "When true, embedded players suppress the AirPlay output-picker button: AirPlay target availability is only advertised when the browser exposes WebKit playback target events AND the player instance is not an embed running with this flag enabled, so embeds lose the AirPlay device picker entirely. When false, embeds keep offering AirPlay device selection.",
+    "requires_restart": false,
+    "family": "player/playback"
   }
 }
