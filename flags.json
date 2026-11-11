@@ -3195,7 +3195,8 @@
   "mweb_fix_cinematic_fullscreen_leak": {
     "requires_restart": false,
     "family": "misc",
-    "description": "Fixes a state/memory leak that occurs when toggling cinematic fullscreen mode on mobile web."
+    "description": "Fixes a state/memory leak that occurs when toggling cinematic fullscreen mode on mobile web.",
+    "removed": true
   },
   "mweb_player_control_on_hover": {
     "requires_restart": false,
@@ -3702,8 +3703,7 @@
   "web_enable_signed_in_chunk_prediction": {
     "description": "ytcfg experiment/config flag, enabled in this build, and it is also forwarded to the server in the serialized experiment-flag parameter string that accompanies requests. It governs 'chunk prediction' for signed-in users, i.e. speculative prediction/prefetch of the next content chunk based on a load-prediction model. No client module in this build reads the flag, so it is a server-side experiment/config flag: the prediction decision is made from the request context and the flag's effect is not observable as client-side UI or client-side code branching.",
     "requires_restart": false,
-    "family": "service-worker/caching",
-    "removed": true
+    "family": "service-worker/caching"
   },
   "html5_force_debug_data_for_client_tmp_logs": {
     "description": "When enabled, ad slot and layout client log payloads include extra debugData details such as slotId, layoutId and entry/fulfillment/expiration trigger data in adClientDataEntry slotData and layoutData; when disabled those debug fields are omitted.",
@@ -3725,8 +3725,7 @@
   "wiz_next_ld_fix_client_ve_spec": {
     "description": "Server-side experiment/config flag exposed only through ytcfg EXperimentFlags; no client-side implementation for this key exists in the bundled client code. It belongs to the WIZ next-generation visual-element (VE) logging experiments (siblings include wiz_next_client_ve_parent_fix and wiz_next_tracking_key_prioritize_client_ve_spec) and appears to gate a server-side fix related to logging directives carrying clientVeSpec data. No observable UI or client runtime behavior is controlled by it in this build.",
     "requires_restart": false,
-    "family": "experiments/config infra",
-    "removed": true
+    "family": "experiments/config infra"
   },
   "music_web_enable_diwali_2026_statement_banner": {
     "description": "Enables the Diwali 2026 presentation of a server-supplied statement banner in ytmusic-statement-banner-renderer. When true, the banner is rendered full-bleed, its primary and secondary buttons use the large button size, and a promo badge containing an icon and the text \"YouTube Music\" is inserted above the banner title. It does not create or fetch the banner itself; it only changes how an existing statement banner is displayed.",
@@ -3773,5 +3772,15 @@
     "description": "When true, embedded players suppress the AirPlay output-picker button: AirPlay target availability is only advertised when the browser exposes WebKit playback target events AND the player instance is not an embed running with this flag enabled, so embeds lose the AirPlay device picker entirely. When false, embeds keep offering AirPlay device selection.",
     "requires_restart": false,
     "family": "player/playback"
+  },
+  "music_web_enable_spacebar_play_pause_fix": {
+    "description": "Selects which Space-key handling the player uses for play/pause. When enabled, a Space keydown anywhere in the page triggers the spacebar play/pause handler and suppresses the default page scroll, unless the focused element is a content-editable field (so typing a space in text entry, e.g. comment or search boxes, still works). When disabled, the older, narrower rule applies: the shortcut only fires if the focused target is a recognized control (paper button, paper icon button, paper FAB, paper slider) or the movie_player video element, and is ignored otherwise.",
+    "requires_restart": false,
+    "family": "player/playback"
+  },
+  "music_web_enable_white_client_toasts": {
+    "description": "Chooses the component used to display the client's transient toast/notification messages (playback errors, generic player errors and other queued status text). When enabled, the toast service builds a ytmusic-notification-text-renderer element (the white/light text notification) and displays each queued message through it as a successResponseText value, opened above the player bar using the --ytmusic-player-bar-height CSS custom property. When disabled, the legacy tp-yt-paper-toast element is built instead and the plain message text is shown in it with a vertical offset. The component type is chosen once when the toast service is created at client startup.",
+    "requires_restart": false,
+    "family": "popup/dialog/menus"
   }
 }

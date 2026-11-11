@@ -2,6 +2,33 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-11 19:26:00 UTC
+
+### Client version
+- INNERTUBE_CLIENT_VERSION: `1.20261104.00.00` → `1.20261110.04.00`
+- PLAYER_CLIENT_VERSION: `1.20261103.11.00` → `1.20261103.11.00` _(unchanged)_
+
+**Summary:** This build is dominated by minifier churn (renamed internals, renumbered generator/closure helpers, semantically identical code), with a few real changes: multi-select rows now render their overflow menu inert, the product/shopping description shelf and content-line view models were dropped in favor of a stub registration, and the basic section header view model added a secondaryDescription line.
+
+**What changed:**
+- **Multi-select mode now makes list-item menus inert (accessibility/interaction):** The Polymer template of the responsive list item now binds the inert attribute to the multi-select flag on the item's overflow menu. When multi-select is active, the row menu becomes non-interactive and non-focusable, so accidental menu activation is blocked while selecting items. No other change to that template's structure or bindings was observed.
+- **Product/shopping description shelf and content-line view models removed from the bundle:** The dedicated product/shopping description components are no longer defined in this build: the shelf component, its content-line, content-line-item and description-item sub-components, and the lazy-load registrations for the shelf and description-item tokens are gone. The shoppingDescriptionShelfViewModel slot is now mapped to a stub loader that only registers the YtShoppingDescriptionShelfViewModel tag name and returns a placeholder, so server data for that shelf can no longer be rendered by a real component. The separate shoppingHubProductViewModel slot is unchanged.
+- **Section header view model gains a secondary description line:** The shared basic section header view model now reads a secondaryDescription field from its data and renders it in a separate text element below the title and subtitle (new response field plus a new element class). This is an added renderer capability rather than a change to existing rendered content.
+
+### EXPERIMENT_FLAGS
+**Added:**
+- `music_web_enable_spacebar_play_pause_fix` — Selects which Space-key handling the player uses for play/pause. When enabled, a Space keydown anywhere in the page triggers the spacebar play/pause handler and suppresses the default page scroll, unless the focused element is a content-editable field (so typing a space in text entry, e.g. comment or search boxes, still works). When disabled, the older, narrower rule applies: the shortcut only fires if the focused target is a recognized control (paper button, paper icon button, paper FAB, paper slider) or the movie_player video element, and is ignored otherwise. _(requires restart: no; family: player/playback)_
+- `music_web_enable_white_client_toasts` — Chooses the component used to display the client's transient toast/notification messages (playback errors, generic player errors and other queued status text). When enabled, the toast service builds a ytmusic-notification-text-renderer element (the white/light text notification) and displays each queued message through it as a successResponseText value, opened above the player bar using the --ytmusic-player-bar-height CSS custom property. When disabled, the legacy tp-yt-paper-toast element is built instead and the plain message text is shown in it with a vertical offset. The component type is chosen once when the toast service is created at client startup. _(requires restart: no; family: popup/dialog/menus)_
+
+**Removed:**
+- `mweb_fix_cinematic_fullscreen_leak`
+
+**Reappeared:**
+- `web_enable_signed_in_chunk_prediction`
+- `wiz_next_ld_fix_client_ve_spec`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-11 05:35:40 UTC
 
 ### Client version
