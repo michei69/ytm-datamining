@@ -587,7 +587,8 @@
   "enable_zero_prefix_mention_suggestion_web": {
     "requires_restart": false,
     "family": "search",
-    "description": "Shows @mention suggestions in comment boxes before the user has typed any prefix character."
+    "description": "Shows @mention suggestions in comment boxes before the user has typed any prefix character.",
+    "removed": true
   },
   "enable_zw_ping": {
     "requires_restart": false,
@@ -1981,7 +1982,8 @@
   "web_enable_killswitch_for_skip_child_tags": {
     "description": "Killswitch that stops the list-item keyboard handler from ignoring Enter/Space presses on nested links and buttons — with it on, the item handles those keys itself.",
     "requires_restart": true,
-    "family": "buttons/controls"
+    "family": "buttons/controls",
+    "removed": true
   },
   "web_enable_killswitch_tabindex_fix": {
     "requires_restart": false,
@@ -2057,7 +2059,8 @@
   "web_exclusive_hover_killswitch": {
     "description": "Killswitch that disables the exclusive hover effect on cards and list items, falling back to the legacy hover styling.",
     "requires_restart": false,
-    "family": "telemetry/logging"
+    "family": "telemetry/logging",
+    "removed": true
   },
   "web_fi_listen_disable_bound_fn_helper": {
     "requires_restart": false,
@@ -3656,7 +3659,8 @@
   "music_web_is_canary_control": {
     "description": "Server-side experiment/config flag with no observable client behavior: it is not read anywhere in the indexed YouTube Music client scripts or the raw page config. Nothing in the client code consumes this value (the client derives its canary state separately, from the CLIENT_CANARY_STATE page config value and the client-version suffix, not from this flag), so no UI, playback, or request behavior can be attributed to it in this build.",
     "requires_restart": false,
-    "family": "experiments/config infra"
+    "family": "experiments/config infra",
+    "removed": true
   },
   "web_enable_tracing": {
     "description": "Server-side experiment/config flag with no observable client behavior in the indexed client code; it appears only as enabled server configuration with no gated client implementation found.",
@@ -3781,5 +3785,15 @@
     "description": "Chooses the component used to display the client's transient toast/notification messages (playback errors, generic player errors and other queued status text). When enabled, the toast service builds a ytmusic-notification-text-renderer element (the white/light text notification) and displays each queued message through it as a successResponseText value, opened above the player bar using the --ytmusic-player-bar-height CSS custom property. When disabled, the legacy tp-yt-paper-toast element is built instead and the plain message text is shown in it with a vertical offset. The component type is chosen once when the toast service is created at client startup.",
     "requires_restart": false,
     "family": "popup/dialog/menus"
+  },
+  "web_enable_wiz_next_hover_logging": {
+    "description": "Enables hover-gesture interaction logging for visual-element (VE) logging targets. When on, an element whose logging directives declare a hover gesture type (gestures.types bit for hover) gets a mouse-enter tracker that measures how long the pointer dwells on it; dwell times between 500 ms and 600000 ms are then reported as an INTERACTION_LOGGING_GESTURE_TYPE_HOVER interaction log carrying hoverData.durationHoveredMs, and the element is re-armed for the next hover. The flag also switches gesture-type lookup to prefer directives carried in the element's context/rendererContext logging context before falling back to the element's own loggingDirectives, and hover trackers are cancelled when an element's visual-element logging is torn down. When off, no hover dwell interaction events are emitted and only the element's own loggingDirectives are consulted for gesture types.",
+    "requires_restart": false,
+    "family": "telemetry/logging"
+  },
+  "wiz_experiment_ytd_redeem_code_feature": {
+    "description": "Server-provided experiment/config flag from the YouTube-desktop (ytd) 'wiz_experiment_ytd_*' experiment group, configured alongside other ytd renderer experiments (comments entry-point header renderer, page introduction renderer) and a redeem-code feature toggle. It appears only in the page's server-supplied experiment flag configuration; no shipped Music web bundle reads it, so it has no observable client-side behavior in this client and should be treated as a server-side experiment/config flag for a code-redemption feature with no client implementation in the evidence.",
+    "requires_restart": false,
+    "family": "experiments/config infra"
   }
 }

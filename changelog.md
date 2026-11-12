@@ -2,6 +2,27 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-12 19:43:41 UTC
+
+### Client version
+- INNERTUBE_CLIENT_VERSION: `1.20261110.04.00` → `1.20261110.04.00` _(unchanged)_
+- PLAYER_CLIENT_VERSION: `1.20261103.11.00` → `1.20261103.11.00-canary_control_1.20261112.04.00`
+
+**Summary:** The player build label changed from 1.20261103.11.00 to 1.20261103.11.00-canary_control_1.20261112.04.00, but the tracked source files (player base.js and the Polymer bundle) are byte-identical. This is a canary/control channel reassignment with no client-code changes.
+
+### EXPERIMENT_FLAGS
+**Added:**
+- `web_enable_wiz_next_hover_logging` — Enables hover-gesture interaction logging for visual-element (VE) logging targets. When on, an element whose logging directives declare a hover gesture type (gestures.types bit for hover) gets a mouse-enter tracker that measures how long the pointer dwells on it; dwell times between 500 ms and 600000 ms are then reported as an INTERACTION_LOGGING_GESTURE_TYPE_HOVER interaction log carrying hoverData.durationHoveredMs, and the element is re-armed for the next hover. The flag also switches gesture-type lookup to prefer directives carried in the element's context/rendererContext logging context before falling back to the element's own loggingDirectives, and hover trackers are cancelled when an element's visual-element logging is torn down. When off, no hover dwell interaction events are emitted and only the element's own loggingDirectives are consulted for gesture types. _(requires restart: no; family: telemetry/logging)_
+- `wiz_experiment_ytd_redeem_code_feature` — Server-provided experiment/config flag from the YouTube-desktop (ytd) 'wiz_experiment_ytd_*' experiment group, configured alongside other ytd renderer experiments (comments entry-point header renderer, page introduction renderer) and a redeem-code feature toggle. It appears only in the page's server-supplied experiment flag configuration; no shipped Music web bundle reads it, so it has no observable client-side behavior in this client and should be treated as a server-side experiment/config flag for a code-redemption feature with no client implementation in the evidence. _(requires restart: no; family: experiments/config infra)_
+
+**Removed:**
+- `enable_zero_prefix_mention_suggestion_web`
+- `music_web_is_canary_control`
+- `web_enable_killswitch_for_skip_child_tags`
+- `web_exclusive_hover_killswitch`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-12 06:40:49 UTC
 
 ### EXPERIMENT_FLAGS
