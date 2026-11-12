@@ -3195,8 +3195,7 @@
   "mweb_fix_cinematic_fullscreen_leak": {
     "requires_restart": false,
     "family": "misc",
-    "description": "Fixes a state/memory leak that occurs when toggling cinematic fullscreen mode on mobile web.",
-    "removed": true
+    "description": "Fixes a state/memory leak that occurs when toggling cinematic fullscreen mode on mobile web."
   },
   "mweb_player_control_on_hover": {
     "requires_restart": false,
@@ -3687,18 +3686,19 @@
   "ab_fk_sk_cl": {
     "description": "Server-side experiment/config flag with no observable client behavior in the downloaded web client; it is present only in ytcfg EXPERIMENT_FLAGS/serialized flags (true) with no corresponding client-side gating logic found.",
     "requires_restart": false,
-    "family": "experiments/config infra",
-    "removed": true
+    "family": "experiments/config infra"
   },
   "music_web_enable_action_bar_view_model_in_player_overlay": {
     "description": "ytcfg experiment flag, enabled in this build. It targets rendering of the player overlay's button row (player page / mini-player action area) through the shared action bar view model instead of legacy individual button renderers. No client code in this build reads the flag: the client renders the action bar view model group (yt-video-action-bar-view-model with its segmented like/dislike button child) whenever the server includes that data in the response, so the flag's effect can only be expressed in the server-provided player overlay payload. Treat it as a server-side experiment/config flag with no client-side gate and no independently observable client behavior.",
     "requires_restart": false,
-    "family": "player/playback"
+    "family": "player/playback",
+    "removed": true
   },
   "music_web_enable_like_count_in_player_overlay": {
     "description": "ytcfg experiment flag, enabled in this build. It targets showing the like count (the numeric value alongside the thumbs-up toggle) in the player overlay. This build's client contains no reference to the flag: the like button component (like-button-view-model) already takes its number text from the server-provided likeCountIfIndifferent / likeCountIfLiked fields whenever those fields are present in the response. Whether the count is displayed therefore depends on the payload the server returns, so this is a server-side experiment/config flag with no client-side gate and no independently observable client behavior.",
     "requires_restart": false,
-    "family": "player/playback"
+    "family": "player/playback",
+    "removed": true
   },
   "web_enable_signed_in_chunk_prediction": {
     "description": "ytcfg experiment/config flag, enabled in this build, and it is also forwarded to the server in the serialized experiment-flag parameter string that accompanies requests. It governs 'chunk prediction' for signed-in users, i.e. speculative prediction/prefetch of the next content chunk based on a load-prediction model. No client module in this build reads the flag, so it is a server-side experiment/config flag: the prediction decision is made from the request context and the flag's effect is not observable as client-side UI or client-side code branching.",
@@ -3755,8 +3755,7 @@
   "music_web_enable_station_ccv": {
     "description": "Server-side experiment/config flag delivered via ytcfg. It is only present in the client configuration payload and has no observable client-side implementation in the indexed sources, so it does not directly control any UI or playback behavior in the web client code; its effect (if any) is applied server-side.",
     "requires_restart": false,
-    "family": "experiments/config infra",
-    "removed": true
+    "family": "experiments/config infra"
   },
   "wiz_experiment_ytd_page_introduction_renderer": {
     "description": "Server-side experiment/config flag delivered via ytcfg. It is only present in the client configuration payload and has no observable client-side implementation in the indexed sources, so it does not directly control any UI or rendering behavior in the web client code; its effect (if any) is applied server-side.",
