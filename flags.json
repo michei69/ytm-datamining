@@ -3654,7 +3654,8 @@
   "music_web_is_canary": {
     "description": "Server-side experiment/config flag with no observable client behavior in this build: it does not appear anywhere in the indexed client scripts and is not present in the page config (its runtime value is undefined). No client code path reads it, so no UI, player, or navigation behavior can be attributed to it; any effect would be applied entirely by the server (e.g., which build or experiment treatment is served).",
     "requires_restart": false,
-    "family": "experiments/config infra"
+    "family": "experiments/config infra",
+    "removed": true
   },
   "music_web_is_canary_control": {
     "description": "Server-side experiment/config flag with no observable client behavior: it is not read anywhere in the indexed YouTube Music client scripts or the raw page config. Nothing in the client code consumes this value (the client derives its canary state separately, from the CLIENT_CANARY_STATE page config value and the client-version suffix, not from this flag), so no UI, playback, or request behavior can be attributed to it in this build.",
@@ -3707,7 +3708,8 @@
   "web_enable_signed_in_chunk_prediction": {
     "description": "ytcfg experiment/config flag, enabled in this build, and it is also forwarded to the server in the serialized experiment-flag parameter string that accompanies requests. It governs 'chunk prediction' for signed-in users, i.e. speculative prediction/prefetch of the next content chunk based on a load-prediction model. No client module in this build reads the flag, so it is a server-side experiment/config flag: the prediction decision is made from the request context and the flag's effect is not observable as client-side UI or client-side code branching.",
     "requires_restart": false,
-    "family": "service-worker/caching"
+    "family": "service-worker/caching",
+    "removed": true
   },
   "html5_force_debug_data_for_client_tmp_logs": {
     "description": "When enabled, ad slot and layout client log payloads include extra debugData details such as slotId, layoutId and entry/fulfillment/expiration trigger data in adClientDataEntry slotData and layoutData; when disabled those debug fields are omitted.",
@@ -3729,7 +3731,8 @@
   "wiz_next_ld_fix_client_ve_spec": {
     "description": "Server-side experiment/config flag exposed only through ytcfg EXperimentFlags; no client-side implementation for this key exists in the bundled client code. It belongs to the WIZ next-generation visual-element (VE) logging experiments (siblings include wiz_next_client_ve_parent_fix and wiz_next_tracking_key_prioritize_client_ve_spec) and appears to gate a server-side fix related to logging directives carrying clientVeSpec data. No observable UI or client runtime behavior is controlled by it in this build.",
     "requires_restart": false,
-    "family": "experiments/config infra"
+    "family": "experiments/config infra",
+    "removed": true
   },
   "music_web_enable_diwali_2026_statement_banner": {
     "description": "Enables the Diwali 2026 presentation of a server-supplied statement banner in ytmusic-statement-banner-renderer. When true, the banner is rendered full-bleed, its primary and secondary buttons use the large button size, and a promo badge containing an icon and the text \"YouTube Music\" is inserted above the banner title. It does not create or fetch the banner itself; it only changes how an existing statement banner is displayed.",

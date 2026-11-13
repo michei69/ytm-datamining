@@ -2,6 +2,27 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-13 05:57:06 UTC
+
+### Client version
+- INNERTUBE_CLIENT_VERSION: `1.20261110.04.00` → `1.20261110.04.00` _(unchanged)_
+- PLAYER_CLIENT_VERSION: `1.20261103.11.00-canary_control_1.20261112.04.00` → `1.20261111.09.00-canary_experiment_1.20261110.09.00`
+
+**Summary:** Apart from a bumped hardcoded player build label and one new analytics event identifier, this player bundle revision carries no evidenced user-visible, playback, API, or navigation change; the remaining differences are internal build/obfuscation churn.
+
+**What changed:**
+- **Player build label / reported client version updated (internal):** The hardcoded player web client version string changed from youtube.player.web_20261103_11_RC00 to youtube.player.web_20261111_09_RC00. It is parsed with date regexes to derive the build date reported as the client version and is also embedded as a request parameter value, so the reported client version changes, but the surrounding logic is unchanged.
+- **New analytics event identifier added to the client event table:** A new client event identifier, elementsReceivedResourcesEvent with numeric id 574, was appended to the same event-name/value table that already contains shortsEffectStartedEvent:571, shortsEffectEndedEvent:572 and networkQualityTransitionEvent:573. This adds a new logging/telemetry surface; no UI is affected.
+- **Per-build token in stream URL handling replaced (internal):** Internal only: the opaque per-build token used inside the player's stream-URL / signature-handling table was rotated (sq9iliW875smKIB593-_w8_ was replaced by dPsE3mwl9wEoKIB393-_w8_). The surrounding URL-sanitising data (googlevideo host patterns, cmo parameters, fallback_count, Untrusted URL handling) is otherwise unchanged, so this is a build artifact rather than a behavioral change.
+
+### EXPERIMENT_FLAGS
+**Removed:**
+- `music_web_is_canary`
+- `web_enable_signed_in_chunk_prediction`
+- `wiz_next_ld_fix_client_ve_spec`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-12 19:43:41 UTC
 
 ### Client version
