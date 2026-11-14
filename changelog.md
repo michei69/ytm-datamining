@@ -2,6 +2,26 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-14 05:46:12 UTC
+
+### Client version
+- INNERTUBE_CLIENT_VERSION: `1.20261110.04.00` → `1.20261110.04.00` _(unchanged)_
+- PLAYER_CLIENT_VERSION: `1.20261111.09.00-canary_experiment_1.20261110.09.00` → `1.20261110.09.00`
+
+**Summary:** The player build label rolls back from the canary-experiment build (web_20261111_09_RC00) to the standard release (web_20261110_09_RC00), and one telemetry event type is dropped; otherwise both builds expose the same feature gates and behavior, with the Polymer/Music UI bundle unchanged.
+
+**What changed:**
+- **Player build label reverts from canary experiment build to standard release:** The embedded player release identifier reported in playback statistics and in the feedback/debug product data changes from the canary-experiment build to the standard release build. This is a build-label/rollout change; the version-parsing helper that derives the build date from that label reports the new date instead.
+- **Telemetry event type elementsReceivedResourcesEvent removed from client event enum:** The client event/log type enumeration used by the service-worker health database and general event logging loses the trailing entry for received-resources events (id 574). All remaining entries (through 573) are unchanged, so this event type can no longer be recorded or reported in the new build. Only internal telemetry is affected; nothing user-visible.
+- **Internal media-URL constant tokens regenerated:** The internal constant tokens used by the player's media-URL handling (googlevideo host matching, local/proxy URL rewriting and the 'ep' URL parameter) are regenerated between builds. Behavior of URL rewriting and playback URL validation is otherwise identical; this is an internal mechanism change with no user-visible effect.
+- **No functional or experiment-gate changes detected in shared player features:** Comparing stable identifiers that both builds share - the clickable endcap-ad experiment gate and its layout z-index values (65/66/67), playerResponseCpn plumbing into playback stats and remote-control payloads, the AV1 probe codec-level experiment, the audio-description setting behavior, custom scrubber v2, ad preload/cue flags, and the interstitial ad layout element names - shows the same logic and the same experiment identifiers in both builds. No experiment flag was added or removed and no user-facing playback, ad, or navigation behavior differs, so this update is an internal rebuild of the same player.
+
+### EXPERIMENT_FLAGS
+**Reappeared:**
+- `wiz_next_ld_fix_client_ve_spec`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-13 05:57:06 UTC
 
 ### Client version

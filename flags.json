@@ -3731,8 +3731,7 @@
   "wiz_next_ld_fix_client_ve_spec": {
     "description": "Server-side experiment/config flag exposed only through ytcfg EXperimentFlags; no client-side implementation for this key exists in the bundled client code. It belongs to the WIZ next-generation visual-element (VE) logging experiments (siblings include wiz_next_client_ve_parent_fix and wiz_next_tracking_key_prioritize_client_ve_spec) and appears to gate a server-side fix related to logging directives carrying clientVeSpec data. No observable UI or client runtime behavior is controlled by it in this build.",
     "requires_restart": false,
-    "family": "experiments/config infra",
-    "removed": true
+    "family": "experiments/config infra"
   },
   "music_web_enable_diwali_2026_statement_banner": {
     "description": "Enables the Diwali 2026 presentation of a server-supplied statement banner in ytmusic-statement-banner-renderer. When true, the banner is rendered full-bleed, its primary and secondary buttons use the large button size, and a promo badge containing an icon and the text \"YouTube Music\" is inserted above the banner title. It does not create or fetch the banner itself; it only changes how an existing statement banner is displayed.",
