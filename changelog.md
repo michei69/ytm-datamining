@@ -2,6 +2,19 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-14 17:50:03 UTC
+
+### EXPERIMENT_FLAGS
+**Added:**
+- `web_renderer_stamper_skip_element_pool_for_cow` — Controls whether the Polymer renderer stamper skips the shared element pool for components that are CoW (client-side Wiz) web-component wrappers. When enabled, such custom elements are not returned to the reusable element pool when they are removed from a stamped list/container, so they are recreated fresh instead of being recycled and re-stamped; when disabled, they are pooled and reused like other custom elements. This affects DOM stamping/component reuse behavior (and thus recycled-element reuse counters) rather than any user-facing label or layout. _(requires restart: no; family: experiments/config infra)_
+- `wiz_experiment_ytd_report_history_section_renderer` — Server-side experiment/config flag that gates the experimental ytd_report_history_section_renderer (a report-history section renderer) in the Wiz rendering framework. In this build it only appears as a boolean entry in the client's experiment-flags config delivered via ytcfg; there is no client-side code path, custom element, or renderer in the YouTube Music web client that reads it, so it is a server-side experiment/config flag with no observable client behavior. _(requires restart: no; family: experiments/config infra)_
+
+**Removed:**
+- `log_gel_compression_latency_lr`
+- `wiz_experiment_ytd_redeem_code_feature`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-14 05:46:12 UTC
 
 ### Client version

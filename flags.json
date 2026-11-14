@@ -1013,7 +1013,8 @@
   "log_gel_compression_latency_lr": {
     "description": "Logging/network plumbing only, no UI effect. Records GEL gzip-compression latency on the LR (living-room) client (10% sampled).",
     "requires_restart": false,
-    "family": "telemetry/logging"
+    "family": "telemetry/logging",
+    "removed": true
   },
   "log_heartbeat_on_blur": {
     "requires_restart": false,
@@ -3795,6 +3796,17 @@
   },
   "wiz_experiment_ytd_redeem_code_feature": {
     "description": "Server-provided experiment/config flag from the YouTube-desktop (ytd) 'wiz_experiment_ytd_*' experiment group, configured alongside other ytd renderer experiments (comments entry-point header renderer, page introduction renderer) and a redeem-code feature toggle. It appears only in the page's server-supplied experiment flag configuration; no shipped Music web bundle reads it, so it has no observable client-side behavior in this client and should be treated as a server-side experiment/config flag for a code-redemption feature with no client implementation in the evidence.",
+    "requires_restart": false,
+    "family": "experiments/config infra",
+    "removed": true
+  },
+  "web_renderer_stamper_skip_element_pool_for_cow": {
+    "description": "Controls whether the Polymer renderer stamper skips the shared element pool for components that are CoW (client-side Wiz) web-component wrappers. When enabled, such custom elements are not returned to the reusable element pool when they are removed from a stamped list/container, so they are recreated fresh instead of being recycled and re-stamped; when disabled, they are pooled and reused like other custom elements. This affects DOM stamping/component reuse behavior (and thus recycled-element reuse counters) rather than any user-facing label or layout.",
+    "requires_restart": false,
+    "family": "experiments/config infra"
+  },
+  "wiz_experiment_ytd_report_history_section_renderer": {
+    "description": "Server-side experiment/config flag that gates the experimental ytd_report_history_section_renderer (a report-history section renderer) in the Wiz rendering framework. In this build it only appears as a boolean entry in the client's experiment-flags config delivered via ytcfg; there is no client-side code path, custom element, or renderer in the YouTube Music web client that reads it, so it is a server-side experiment/config flag with no observable client behavior.",
     "requires_restart": false,
     "family": "experiments/config infra"
   }
