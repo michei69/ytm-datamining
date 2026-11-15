@@ -2,6 +2,21 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-15 18:40:18 UTC
+
+### EXPERIMENT_FLAGS
+**Added:**
+- `music_web_enable_ad_pause_fix` — Fixes play/pause UI state handling during ad playback. When enabled, the play/pause button stays enabled while an ad is showing instead of being disabled, and the "is playing" indicator is synced directly from ad state changes so it reflects whether the ad is actually playing. Without the flag, the play/pause control can be disabled and the playing indicator can desync from the real ad playback state. _(requires restart: no; family: player/playback)_
+
+**Removed:**
+- `music_web_enable_station_ccv`
+
+**Reappeared:**
+- `music_web_is_canary`
+- `music_web_is_canary_control`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-15 05:46:14 UTC
 
 ### EXPERIMENT_FLAGS

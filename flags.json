@@ -3655,14 +3655,12 @@
   "music_web_is_canary": {
     "description": "Server-side experiment/config flag with no observable client behavior in this build: it does not appear anywhere in the indexed client scripts and is not present in the page config (its runtime value is undefined). No client code path reads it, so no UI, player, or navigation behavior can be attributed to it; any effect would be applied entirely by the server (e.g., which build or experiment treatment is served).",
     "requires_restart": false,
-    "family": "experiments/config infra",
-    "removed": true
+    "family": "experiments/config infra"
   },
   "music_web_is_canary_control": {
     "description": "Server-side experiment/config flag with no observable client behavior: it is not read anywhere in the indexed YouTube Music client scripts or the raw page config. Nothing in the client code consumes this value (the client derives its canary state separately, from the CLIENT_CANARY_STATE page config value and the client-version suffix, not from this flag), so no UI, playback, or request behavior can be attributed to it in this build.",
     "requires_restart": false,
-    "family": "experiments/config infra",
-    "removed": true
+    "family": "experiments/config infra"
   },
   "web_enable_tracing": {
     "description": "Server-side experiment/config flag with no observable client behavior in the indexed client code; it appears only as enabled server configuration with no gated client implementation found.",
@@ -3762,7 +3760,8 @@
   "music_web_enable_station_ccv": {
     "description": "Server-side experiment/config flag delivered via ytcfg. It is only present in the client configuration payload and has no observable client-side implementation in the indexed sources, so it does not directly control any UI or playback behavior in the web client code; its effect (if any) is applied server-side.",
     "requires_restart": false,
-    "family": "experiments/config infra"
+    "family": "experiments/config infra",
+    "removed": true
   },
   "wiz_experiment_ytd_page_introduction_renderer": {
     "description": "Server-side experiment/config flag delivered via ytcfg. It is only present in the client configuration payload and has no observable client-side implementation in the indexed sources, so it does not directly control any UI or rendering behavior in the web client code; its effect (if any) is applied server-side.",
@@ -3816,6 +3815,11 @@
   },
   "enable_h5_ustreamer_driven_smearing": {
     "description": "Selects which measurement path supplies ad/playback 'smearing' (the server-provided timing offsets used when attributing ad events and pings such as QOES) for the HTML5 player. When enabled for the relevant client type, the client reads the value of this flag; otherwise it falls back to the separate web-only variant of the same smearing setting. It is consulted together with related smearing switches (e.g. the LIFA smearing variant) while the player decides between the micro-streamer-driven and client-side implementations, and it is only reached for enabled reporting/telemetry paths, so it changes measurement plumbing rather than any user-visible control.",
+    "requires_restart": false,
+    "family": "player/playback"
+  },
+  "music_web_enable_ad_pause_fix": {
+    "description": "Fixes play/pause UI state handling during ad playback. When enabled, the play/pause button stays enabled while an ad is showing instead of being disabled, and the \"is playing\" indicator is synced directly from ad state changes so it reflects whether the ad is actually playing. Without the flag, the play/pause control can be disabled and the playing indicator can desync from the real ad playback state.",
     "requires_restart": false,
     "family": "player/playback"
   }
