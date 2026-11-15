@@ -3797,8 +3797,7 @@
   "wiz_experiment_ytd_redeem_code_feature": {
     "description": "Server-provided experiment/config flag from the YouTube-desktop (ytd) 'wiz_experiment_ytd_*' experiment group, configured alongside other ytd renderer experiments (comments entry-point header renderer, page introduction renderer) and a redeem-code feature toggle. It appears only in the page's server-supplied experiment flag configuration; no shipped Music web bundle reads it, so it has no observable client-side behavior in this client and should be treated as a server-side experiment/config flag for a code-redemption feature with no client implementation in the evidence.",
     "requires_restart": false,
-    "family": "experiments/config infra",
-    "removed": true
+    "family": "experiments/config infra"
   },
   "web_renderer_stamper_skip_element_pool_for_cow": {
     "description": "Controls whether the Polymer renderer stamper skips the shared element pool for components that are CoW (client-side Wiz) web-component wrappers. When enabled, such custom elements are not returned to the reusable element pool when they are removed from a stamped list/container, so they are recreated fresh instead of being recycled and re-stamped; when disabled, they are pooled and reused like other custom elements. This affects DOM stamping/component reuse behavior (and thus recycled-element reuse counters) rather than any user-facing label or layout.",
@@ -3809,5 +3808,15 @@
     "description": "Server-side experiment/config flag that gates the experimental ytd_report_history_section_renderer (a report-history section renderer) in the Wiz rendering framework. In this build it only appears as a boolean entry in the client's experiment-flags config delivered via ytcfg; there is no client-side code path, custom element, or renderer in the YouTube Music web client that reads it, so it is a server-side experiment/config flag with no observable client behavior.",
     "requires_restart": false,
     "family": "experiments/config infra"
+  },
+  "ab_mis_log_err": {
+    "description": "A/B experiment measurement flag carried in the client's experiment-flag map (delivered both as a boolean in the experiment flags object and in the serialized experiment flags string). It belongs to the same 'ab_'-prefixed group of experiment-detection/measurement switches and, based on the trimmed flag name, governs whether errors encountered while logging/reporting A/B experiment assignments are surfaced. No client-side implementation consuming this key appears in the analyzed sources, so it exists only as server-assigned experiment/config configuration with no observable UI or playback behavior in the client.",
+    "requires_restart": false,
+    "family": "experiments/config infra"
+  },
+  "enable_h5_ustreamer_driven_smearing": {
+    "description": "Selects which measurement path supplies ad/playback 'smearing' (the server-provided timing offsets used when attributing ad events and pings such as QOES) for the HTML5 player. When enabled for the relevant client type, the client reads the value of this flag; otherwise it falls back to the separate web-only variant of the same smearing setting. It is consulted together with related smearing switches (e.g. the LIFA smearing variant) while the player decides between the micro-streamer-driven and client-side implementations, and it is only reached for enabled reporting/telemetry paths, so it changes measurement plumbing rather than any user-visible control.",
+    "requires_restart": false,
+    "family": "player/playback"
   }
 }

@@ -2,6 +2,18 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-15 05:46:14 UTC
+
+### EXPERIMENT_FLAGS
+**Added:**
+- `ab_mis_log_err` — A/B experiment measurement flag carried in the client's experiment-flag map (delivered both as a boolean in the experiment flags object and in the serialized experiment flags string). It belongs to the same 'ab_'-prefixed group of experiment-detection/measurement switches and, based on the trimmed flag name, governs whether errors encountered while logging/reporting A/B experiment assignments are surfaced. No client-side implementation consuming this key appears in the analyzed sources, so it exists only as server-assigned experiment/config configuration with no observable UI or playback behavior in the client. _(requires restart: no; family: experiments/config infra)_
+- `enable_h5_ustreamer_driven_smearing` — Selects which measurement path supplies ad/playback 'smearing' (the server-provided timing offsets used when attributing ad events and pings such as QOES) for the HTML5 player. When enabled for the relevant client type, the client reads the value of this flag; otherwise it falls back to the separate web-only variant of the same smearing setting. It is consulted together with related smearing switches (e.g. the LIFA smearing variant) while the player decides between the micro-streamer-driven and client-side implementations, and it is only reached for enabled reporting/telemetry paths, so it changes measurement plumbing rather than any user-visible control. _(requires restart: no; family: player/playback)_
+
+**Reappeared:**
+- `wiz_experiment_ytd_redeem_code_feature`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-14 17:50:03 UTC
 
 ### EXPERIMENT_FLAGS
