@@ -2,6 +2,34 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-17 20:40:46 UTC
+
+### Client version
+- INNERTUBE_CLIENT_VERSION: `1.20261115.14.00` → `1.20261115.14.00` _(unchanged)_
+- PLAYER_CLIENT_VERSION: `1.20261111.09.00` → `1.20261115.00.00`
+
+**Summary:** No observable playback, advertising, navigation or UI behavior changed in this player build. The player simply reports a newer build identifier (the 20261115_00 build instead of 20261111_09), with its internal naming/obfuscation scheme regenerated and internal helper names remapped; experiment flags, ad/player element names, accessibility labels and the available media formats are identical, and the YouTube Music UI bundle is unchanged.
+
+**What changed:**
+- **Player build identifier bumped to the 20261115_00 build (internal):** The build identifier the player reports for itself was updated from the 20261111_09 build to the 20261115_00 build. This identifier is used for build/version identification and logging only; it is an internal version bump rather than a feature change.
+- **Internal naming/obfuscation scheme regenerated (no behavior impact):** The internal name-mangling scheme used throughout the player bundle was regenerated for this build: the table used for dynamic property access changed delimiter, ordering and contents, and the obfuscation keys used to decode internal names changed with it. This is an internal repackaging pass; it does not alter what the player does.
+- **Internal helper and namespace exports renamed, call sites updated in lockstep:** Internal helper names were remapped consistently across the whole bundle, including helpers exposed on the player's public namespace object (for example the boolean experiment-flag reader and the error-reporting helper). Call sites were remapped in lockstep, so this is an internal-only rename with no observable effect.
+- **No behavioral difference found: experiment flags, ad/player UI labels and format table unchanged:** Behavior-bearing values are unchanged between the two builds: the same experiment/feature flag names (e.g. the clickable instream player endcap flag), the same ad and player overlay element names and accessibility labels (e.g. the 'more videos' suggestion view and its previous/next buttons), and an identical media format/quality table with no new formats or resolutions. The YouTube Music UI bundle is unchanged, so no Music-side UI change accompanies this build.
+
+### EXPERIMENT_FLAGS
+**Added:**
+- `wiz_experiment_ytd_list_item_view_model` — Server-side experiment/config flag exposed only through the ytcfg EXPERIMENT_FLAGS map in the page bootstrap config (observed value true); it sits alongside other wiz_experiment_ytd_* entries that gate desktop (ytd) renderer experiments. No client code in this build reads this flag, so there is no observable client behavior to describe: it does not gate the yt-list-item-view-model component or any list item rendering path that could be confirmed from the shipped JavaScript. Its effect, if any, is applied by the server when deciding which renderer/view-model payloads to return. _(requires restart: no; family: experiments/config infra)_
+
+**Removed:**
+- `music_web_is_canary_control`
+- `mweb_fix_cinematic_fullscreen_leak`
+
+**Reappeared:**
+- `music_web_enable_action_bar_view_model_in_player_overlay`
+- `music_web_enable_like_count_in_player_overlay`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-17 07:23:59 UTC
 
 ### Client version
