@@ -2646,8 +2646,7 @@
   "ab_det_sb_lo": {
     "requires_restart": false,
     "family": "misc",
-    "description": "Server-side experiment/config flag ab_det_sb_lo with only server-side configuration evidence; no occurrence was found in indexed client sources so no observable client behavior can be confirmed.",
-    "removed": true
+    "description": "Server-side experiment/config flag ab_det_sb_lo with only server-side configuration evidence; no occurrence was found in indexed client sources so no observable client behavior can be confirmed."
   },
   "action_companion_center_align_description": {
     "requires_restart": false,
@@ -3814,7 +3813,8 @@
   "ab_mis_log_err": {
     "description": "A/B experiment measurement flag carried in the client's experiment-flag map (delivered both as a boolean in the experiment flags object and in the serialized experiment flags string). It belongs to the same 'ab_'-prefixed group of experiment-detection/measurement switches and, based on the trimmed flag name, governs whether errors encountered while logging/reporting A/B experiment assignments are surfaced. No client-side implementation consuming this key appears in the analyzed sources, so it exists only as server-assigned experiment/config configuration with no observable UI or playback behavior in the client.",
     "requires_restart": false,
-    "family": "experiments/config infra"
+    "family": "experiments/config infra",
+    "removed": true
   },
   "enable_h5_ustreamer_driven_smearing": {
     "description": "Selects which measurement path supplies ad/playback 'smearing' (the server-provided timing offsets used when attributing ad events and pings such as QOES) for the HTML5 player. When enabled for the relevant client type, the client reads the value of this flag; otherwise it falls back to the separate web-only variant of the same smearing setting. It is consulted together with related smearing switches (e.g. the LIFA smearing variant) while the player decides between the micro-streamer-driven and client-side implementations, and it is only reached for enabled reporting/telemetry paths, so it changes measurement plumbing rather than any user-visible control.",

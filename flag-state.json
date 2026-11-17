@@ -1,21 +1,33 @@
 {
   "version": 1,
   "flags": {
-    "wiz_experiment_ytd_redeem_code_feature": {
-      "consecutiveMisses": 2,
-      "lastMissingAt": "2026-11-16T05:46:38.124Z"
-    },
-    "ab_mis_log_err": {
-      "consecutiveMisses": 2,
-      "lastMissingAt": "2026-11-16T05:46:38.124Z"
-    },
     "mweb_fix_cinematic_fullscreen_leak": {
-      "consecutiveMisses": 1,
-      "lastMissingAt": "2026-11-16T05:46:38.124Z"
+      "consecutiveMisses": 2,
+      "lastMissingAt": "2026-11-17T07:23:59.412Z"
     },
     "music_web_is_canary_control": {
+      "consecutiveMisses": 2,
+      "lastMissingAt": "2026-11-17T07:23:59.412Z"
+    },
+    "enable_ai_companion": {
       "consecutiveMisses": 1,
-      "lastMissingAt": "2026-11-16T05:46:38.124Z"
+      "lastMissingAt": "2026-11-17T07:23:59.412Z"
+    },
+    "web_enable_killswitch_for_selectable_list_item_on_tap_fix": {
+      "consecutiveMisses": 1,
+      "lastMissingAt": "2026-11-17T07:23:59.412Z"
+    },
+    "web_enable_killswitch_tabindex_fix": {
+      "consecutiveMisses": 1,
+      "lastMissingAt": "2026-11-17T07:23:59.412Z"
+    },
+    "web_list_item_duplicate_command_killswitch": {
+      "consecutiveMisses": 1,
+      "lastMissingAt": "2026-11-17T07:23:59.412Z"
+    },
+    "web_list_item_flat_button_label_killswitch": {
+      "consecutiveMisses": 1,
+      "lastMissingAt": "2026-11-17T07:23:59.412Z"
     }
   }
 }

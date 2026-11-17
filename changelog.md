@@ -2,6 +2,31 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-17 07:23:59 UTC
+
+### Client version
+- INNERTUBE_CLIENT_VERSION: `1.20261110.04.00` → `1.20261115.14.00`
+- PLAYER_CLIENT_VERSION: `1.20261110.09.00` → `1.20261111.09.00`
+
+**Summary:** Both bundles were rebuilt, so the vast majority of the 13.9M-character diff is internal renaming plus a player build-label bump. The real product deltas are small: basic-content paragraphs can now render server-supplied markdown, ad buttons accept custom colors, and lockup action/menu buttons request mainstage icon sizing.
+
+**What changed:**
+- **Basic content paragraphs now render markdown body text:** The basic-content view model gains support for a new markdownText field on a paragraph: the paragraph content block now renders when asset, text or markdownText is present, and markdown text is rendered through the common-mark view model inside the same paragraph-text wrapper (reusing the bold/primary class bindings) with typography set to inherit and the configured markdown plugins. User-visible: server-provided formatted body copy in dialogs, sheets and lockup attachments can be displayed as markdown instead of plain text.
+- **Ad button view model accepts custom colors:** The ad-button view model now takes an optional customColors input and, when supplied, merges it into the button model it builds (the same customColors object the shared button renderer already understands for icon color and gradient). Advertiser-supplied button theming is therefore applied to ad CTA buttons and ad button groups instead of being ignored.
+- **Lockup action-bar and overflow buttons request mainstage icon sizing:** Icon-only lockup action buttons now include mainstageIconSize:true in their override objects, both for the action-bar buttons and for the overflow/menu button in the icon-only-40 position. Because the shared button renderer already honours mainstageIconSize, icons in these lockup action slots render at the mainstage size rather than the default icon size.
+- **Player build label and embedded cache-busting tokens updated:** Internal only: the player's embedded build/version identifier moved from the 2026-11-10 09:00 RC00 label to the 2026-11-11 09:00 RC00 label, which is what the player parses to derive its build date, and the internal string table now carries new opaque cache-busting tokens. No playback behaviour is implied by these constants.
+- **Internal rebuild with no observable behaviour change:** Internal only: essentially all of the diff is a rebuild in which internal identifiers are re-assigned across the whole bundle (helpers, classes, methods and dependency-injection token constants such as the player-controller and suspense-controller tokens) while the surrounding logic stays equivalent. It should not be read as a behaviour change.
+- **URL-scheme sanitizer in the inlined library refactored:** Internal only: the anchor/URL check in the inlined Closure-style library was split into a helper that returns the value only when the existing safe-scheme pattern matches, with an added (currently unused) list of data/http/https/mailto/ftp schemes, and the script/style tag-name guard was extracted out of the inner-HTML setter. Accept/reject semantics are unchanged.
+
+### EXPERIMENT_FLAGS
+**Removed:**
+- `ab_mis_log_err`
+
+**Reappeared:**
+- `ab_det_sb_lo`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-16 05:46:38 UTC
 
 ### EXPERIMENT_FLAGS
