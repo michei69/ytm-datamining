@@ -2,6 +2,24 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-18 06:48:38 UTC
+
+### EXPERIMENT_FLAGS
+**Added:**
+- `wiz_experiment_ytd_preview_comment_feature` — Server-side experiment/config flag delivered in the client's page config (ytcfg experiment flags) with a value of true in the observed runtime config. In this build no client code path reads this key: the only occurrence anywhere in the indexed client bundle is the entry in the serialized experiment-flag object, and searches for any flag-derived identifiers (preview_comment / previewComment / PREVIEW_COMMENT / CommentPreview, ytd_preview_comment_*) find nothing else. Comparable wiz_experiment_ytd_* keys are gated explicitly when used (for example the ghost/skeleton grid variant of the shared ytd renderers is registered only when its own ytd experiment key is enabled), so the absence of any lookup for this key means it has no observable effect on the current YouTube Music web client; whatever comment-preview gating it denotes must be handled server-side or in a build not shipped here. _(requires restart: no; family: experiments/config infra)_
+
+**Removed:**
+- `enable_ai_companion`
+- `web_enable_killswitch_for_selectable_list_item_on_tap_fix`
+- `web_enable_killswitch_tabindex_fix`
+- `web_list_item_duplicate_command_killswitch`
+- `web_list_item_flat_button_label_killswitch`
+
+**Reappeared:**
+- `web_enable_signed_in_chunk_prediction`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-17 20:40:46 UTC
 
 ### Client version

@@ -210,7 +210,8 @@
   "enable_ai_companion": {
     "requires_restart": false,
     "family": "ai",
-    "description": "Provides the AI companion engagement panel, caching its panel state and passing the client conversation id with panel requests."
+    "description": "Provides the AI companion engagement panel, caching its panel state and passing the client conversation id with panel requests.",
+    "removed": true
   },
   "enable_ai_search_web_m1_features": {
     "description": "Renders metadata as an overlay on the thumbnail for AI-search lockups.",
@@ -1978,7 +1979,8 @@
   "web_enable_killswitch_for_selectable_list_item_on_tap_fix": {
     "description": "Killswitch for the selectable list-item tap fix: when on, Space keypresses trigger the item's click path instead of invoking its tap command.",
     "requires_restart": true,
-    "family": "buttons/controls"
+    "family": "buttons/controls",
+    "removed": true
   },
   "web_enable_killswitch_for_skip_child_tags": {
     "description": "Killswitch that stops the list-item keyboard handler from ignoring Enter/Space presses on nested links and buttons — with it on, the item handles those keys itself.",
@@ -1989,7 +1991,8 @@
   "web_enable_killswitch_tabindex_fix": {
     "requires_restart": false,
     "family": "buttons/controls",
-    "description": "Killswitch for the list-item tabindex fix: when on, the earlier behaviour applies and list items that only have a tap handler still receive a tabindex."
+    "description": "Killswitch for the list-item tabindex fix: when on, the earlier behaviour applies and list items that only have a tap handler still receive a tabindex.",
+    "removed": true
   },
   "web_enable_lifecycle_monitoring": {
     "requires_restart": true,
@@ -2167,12 +2170,14 @@
   "web_list_item_duplicate_command_killswitch": {
     "requires_restart": false,
     "family": "buttons/controls",
-    "description": "Killswitch for duplicate list-item commands: when on, a list item without its own tap handler dispatches the command from its renderer context directly."
+    "description": "Killswitch for duplicate list-item commands: when on, a list item without its own tap handler dispatches the command from its renderer context directly.",
+    "removed": true
   },
   "web_list_item_flat_button_label_killswitch": {
     "requires_restart": true,
     "family": "buttons/controls",
-    "description": "Killswitch that reverts list-item labelling: when on, an aria-label is always set even when the item already shows a visible text label."
+    "description": "Killswitch that reverts list-item labelling: when on, an aria-label is always set even when the item already shows a visible text label.",
+    "removed": true
   },
   "web_live_chat_available_bugfix": {
     "requires_restart": false,
@@ -3707,8 +3712,7 @@
   "web_enable_signed_in_chunk_prediction": {
     "description": "ytcfg experiment/config flag, enabled in this build, and it is also forwarded to the server in the serialized experiment-flag parameter string that accompanies requests. It governs 'chunk prediction' for signed-in users, i.e. speculative prediction/prefetch of the next content chunk based on a load-prediction model. No client module in this build reads the flag, so it is a server-side experiment/config flag: the prediction decision is made from the request context and the flag's effect is not observable as client-side UI or client-side code branching.",
     "requires_restart": false,
-    "family": "service-worker/caching",
-    "removed": true
+    "family": "service-worker/caching"
   },
   "html5_force_debug_data_for_client_tmp_logs": {
     "description": "When enabled, ad slot and layout client log payloads include extra debugData details such as slotId, layoutId and entry/fulfillment/expiration trigger data in adClientDataEntry slotData and layoutData; when disabled those debug fields are omitted.",
@@ -3828,6 +3832,11 @@
   },
   "wiz_experiment_ytd_list_item_view_model": {
     "description": "Server-side experiment/config flag exposed only through the ytcfg EXPERIMENT_FLAGS map in the page bootstrap config (observed value true); it sits alongside other wiz_experiment_ytd_* entries that gate desktop (ytd) renderer experiments. No client code in this build reads this flag, so there is no observable client behavior to describe: it does not gate the yt-list-item-view-model component or any list item rendering path that could be confirmed from the shipped JavaScript. Its effect, if any, is applied by the server when deciding which renderer/view-model payloads to return.",
+    "requires_restart": false,
+    "family": "experiments/config infra"
+  },
+  "wiz_experiment_ytd_preview_comment_feature": {
+    "description": "Server-side experiment/config flag delivered in the client's page config (ytcfg experiment flags) with a value of true in the observed runtime config. In this build no client code path reads this key: the only occurrence anywhere in the indexed client bundle is the entry in the serialized experiment-flag object, and searches for any flag-derived identifiers (preview_comment / previewComment / PREVIEW_COMMENT / CommentPreview, ytd_preview_comment_*) find nothing else. Comparable wiz_experiment_ytd_* keys are gated explicitly when used (for example the ghost/skeleton grid variant of the shared ytd renderers is registered only when its own ytd experiment key is enabled), so the absence of any lookup for this key means it has no observable effect on the current YouTube Music web client; whatever comment-preview gating it denotes must be handled server-side or in a build not shipped here.",
     "requires_restart": false,
     "family": "experiments/config infra"
   }
