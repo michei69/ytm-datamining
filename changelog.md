@@ -2,6 +2,29 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-19 20:18:33 UTC
+
+### Client version
+- INNERTUBE_CLIENT_VERSION: `1.20261115.14.00` → `1.20261117.06.00`
+- PLAYER_CLIENT_VERSION: `1.20261115.00.00` → `1.20261119.04.00-canary_experiment_1.20261117.10.00`
+
+**Summary:** This build pair is dominated by a rebuild of both the player base.js and the Music Polymer bundle, so there are almost no product-level changes. The concrete deltas are: a new client-logging event id (cacheTelemetryEvent), the player now shipping a canary_experiment build label (which flips the reported client canary state), and a new parallel protobuf serialization path for playback/SABR messages in the player.
+
+**What changed:**
+- **New client logging event: cacheTelemetryEvent:** The client-side telemetry/GEL event enum gained one new entry, cacheTelemetryEvent (id 575), immediately after elementsReceivedResourcesEvent (574). It appears in both the player base.js and the Music Polymer bundle, i.e. both bundles can now emit a new cache-related telemetry event. This is a logging/telemetry addition; no UI is affected.
+- **Player now identifies itself as a canary_experiment build:** The player build label embedded in the player code changed to youtube.player.web_20261119_04_RC00, matching the new canary_experiment player version. The client's canary-state derivation (unchanged logic) inspects the trailing segment of the client version string: a version ending in canary_experiment maps to "canary", canary_control to "control", otherwise "none". Because the shipped player version now carries the canary_experiment suffix, the client reports CLIENT_CANARY_STATE_CANARY (instead of control/none) in its client context/logging. This is experiment-infrastructure metadata, not a user-visible change.
+- **Player gained a second (parallel) protobuf serialization path for playback/SABR messages:** Many playback, SABR/media, ad, QoE and ping serializers were duplicated: each now has two implementations and dispatches on the runtime type of the message object (a legacy plain-object path and a second, class-based/typed path that can also construct typed message instances). The protobuf field numbers in both branches are identical, so the wire format of playback/SABR requests and pings is unchanged; this is an internal serialization refactor (dual message-representation support), not a protocol change.
+- **Music app features, flags and user-facing strings carried over unchanged (build-only rebuild):** Beyond the three items above, the Music web app's observable behavior is the same in both builds: its toast pipeline (using ytmusic-notification-text-renderer when music_web_enable_white_client_toasts is on, tp-yt-paper-toast otherwise, positioned above the player bar), its subscriber-gated server-queue restoration, its dismissal timestamp key, and the popup/dialog element sets are all carried over unchanged. The remaining bulk of the diff is a rebuild of both bundles in which internal helper names, property keys and lookup tables were regenerated, which produces no new UI, navigation or request/response field behavior.
+
+### EXPERIMENT_FLAGS
+**Added:**
+- `ab_net_tp_e` — Server-side experiment/config flag delivered through ytcfg's EXPERIMENT_FLAGS and serializedExperimentFlags. No client-side implementation or observable UI behavior for this flag is present in the indexed client source, so its behavior cannot be determined from the client code. _(requires restart: no; family: experiments/config infra)_
+
+**Removed:**
+- `ab_det_sb_lo`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-18 06:48:38 UTC
 
 ### EXPERIMENT_FLAGS

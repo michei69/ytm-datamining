@@ -2651,7 +2651,8 @@
   "ab_det_sb_lo": {
     "requires_restart": false,
     "family": "misc",
-    "description": "Server-side experiment/config flag ab_det_sb_lo with only server-side configuration evidence; no occurrence was found in indexed client sources so no observable client behavior can be confirmed."
+    "description": "Server-side experiment/config flag ab_det_sb_lo with only server-side configuration evidence; no occurrence was found in indexed client sources so no observable client behavior can be confirmed.",
+    "removed": true
   },
   "action_companion_center_align_description": {
     "requires_restart": false,
@@ -3837,6 +3838,11 @@
   },
   "wiz_experiment_ytd_preview_comment_feature": {
     "description": "Server-side experiment/config flag delivered in the client's page config (ytcfg experiment flags) with a value of true in the observed runtime config. In this build no client code path reads this key: the only occurrence anywhere in the indexed client bundle is the entry in the serialized experiment-flag object, and searches for any flag-derived identifiers (preview_comment / previewComment / PREVIEW_COMMENT / CommentPreview, ytd_preview_comment_*) find nothing else. Comparable wiz_experiment_ytd_* keys are gated explicitly when used (for example the ghost/skeleton grid variant of the shared ytd renderers is registered only when its own ytd experiment key is enabled), so the absence of any lookup for this key means it has no observable effect on the current YouTube Music web client; whatever comment-preview gating it denotes must be handled server-side or in a build not shipped here.",
+    "requires_restart": false,
+    "family": "experiments/config infra"
+  },
+  "ab_net_tp_e": {
+    "description": "Server-side experiment/config flag delivered through ytcfg's EXPERIMENT_FLAGS and serializedExperimentFlags. No client-side implementation or observable UI behavior for this flag is present in the indexed client source, so its behavior cannot be determined from the client code.",
     "requires_restart": false,
     "family": "experiments/config infra"
   }
