@@ -2,6 +2,31 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-20 06:38:27 UTC
+
+### Client version
+- INNERTUBE_CLIENT_VERSION: `1.20261117.06.00` → `1.20261117.06.00` _(unchanged)_
+- PLAYER_CLIENT_VERSION: `1.20261119.04.00-canary_experiment_1.20261117.10.00` → `1.20261118.11.01-canary_experiment_1.20261117.10.00`
+
+**Summary:** No user-facing change is evidenced in this update: playback, ad/interstitial UI, error messages, experiment flags and request fields behave identically to the previous build, and the Music app bundle is unchanged. The differences are internal build/version identification and regenerated generated code only.
+
+**What changed:**
+- **Player reports an earlier canary build revision:** Internal build/versioning change only. The player identifies itself as an earlier canary build (web_20261118_11_RC01 instead of web_20261119_04_RC00), matching the reported version bump. Nothing about playback, ads, or UI behavior follows from this; it is a build label used when the player reports its own version.
+- **Internal constant table for stream/URL handling regenerated:** Internal code-generation change with no observable effect. The constant table used by the player's URL/stream handling (videoplayback path, index.m3u8, cmo, fvip, signatureCipher, redirector.googlevideo.com, etc.) is now emitted as a plain list rather than a delimited string that was split at runtime, and its ordering changed. The same constants and the same URL/stream handling behavior are present, so stream selection and playback URLs are unaffected.
+- **Full internal code regeneration with identical behavior:** Internal refactor only. The whole player was regenerated with fresh internal names, but the behavior is unchanged: the same UI strings, the same player CSS/element class names (e.g. ytp-ad-module, ytp-ad-player-overlay-layout, ytp-video-interstitial-buttoned-centered-layout), the same ad/error messages, and the same experiment flag names appear before and after. No user-facing change is attributable to this item.
+- **Experiment flags are read through a separate lookup from configuration values:** Internal plumbing change. Checks for experiment flags (e.g. enable_ipad_webview_innertube_context_override, enable_web_tiered_gel, web_attention_logging_enabled) now read them through a separate lookup from the client-configuration values, whereas one lookup previously served both. The same flag names are consulted and the same branches are taken, so no experiment behavior changes.
+- **Internal dispatch indirection regenerated:** Internal code-generation churn. Helpers that are reached through the build's indirection layer were re-emitted with different call-site handles and argument counts. The wrapped helpers still perform the same work, so this does not change any observable behavior.
+
+### EXPERIMENT_FLAGS
+**Removed:**
+- `web_video_preview_sparkles_click_location_helper`
+
+**Reappeared:**
+- `ab_det_sb_lo`
+- `mweb_fix_cinematic_fullscreen_leak`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-19 20:18:33 UTC
 
 ### Client version

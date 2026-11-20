@@ -2651,8 +2651,7 @@
   "ab_det_sb_lo": {
     "requires_restart": false,
     "family": "misc",
-    "description": "Server-side experiment/config flag ab_det_sb_lo with only server-side configuration evidence; no occurrence was found in indexed client sources so no observable client behavior can be confirmed.",
-    "removed": true
+    "description": "Server-side experiment/config flag ab_det_sb_lo with only server-side configuration evidence; no occurrence was found in indexed client sources so no observable client behavior can be confirmed."
   },
   "action_companion_center_align_description": {
     "requires_restart": false,
@@ -3204,8 +3203,7 @@
   "mweb_fix_cinematic_fullscreen_leak": {
     "requires_restart": false,
     "family": "misc",
-    "description": "Fixes a state/memory leak that occurs when toggling cinematic fullscreen mode on mobile web.",
-    "removed": true
+    "description": "Fixes a state/memory leak that occurs when toggling cinematic fullscreen mode on mobile web."
   },
   "mweb_player_control_on_hover": {
     "requires_restart": false,
@@ -3391,7 +3389,8 @@
   "web_video_preview_sparkles_click_location_helper": {
     "requires_restart": false,
     "family": "misc",
-    "description": "Adds a helper that computes the correct click location for the sparkles overlay on video previews."
+    "description": "Adds a helper that computes the correct click location for the sparkles overlay on video previews.",
+    "removed": true
   },
   "webpo_exit_on_net_err": {
     "requires_restart": false,
