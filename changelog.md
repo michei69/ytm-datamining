@@ -2,6 +2,33 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-21 06:30:42 UTC
+
+### Client version
+- INNERTUBE_CLIENT_VERSION: `1.20261117.06.00` → `1.20261117.06.00` _(unchanged)_
+- PLAYER_CLIENT_VERSION: `1.20261118.11.01-canary_experiment_1.20261117.10.00` → `1.20261117.10.00`
+
+**Summary:** The previous build was a canary-experiment flavor of the same player version (1.20261117.10.00); the new build is the plain base build of that version. The diff is dominated by a full regeneration of internal names and constant tables, and the only substantive delta is the embedded player release label, which reverts from the canary-experiment RC to the base RC and therefore changes only build/telemetry reporting.
+
+**What changed:**
+- **Player release label reverts from canary-experiment RC to base RC00:** The build label baked into the player changed from youtube.player.web_20261118_11_RC01 to youtube.player.web_20261117_10_RC00. This is internal/telemetry only: it is the value reported in the playback stats payload field release_version, in the feedback product data field player_release, and in the debug release name surfaced when the web_player_release_debug flag is enabled. No playback or UI behavior changes.
+- **Canary-experiment variant of the build is dropped:** The version string no longer carries the canary_experiment marker that the client uses to classify the player client version (a label ending in canary_experiment maps to the "canary" state, otherwise "none"). With this build the client reports the plain state (CLIENT_CANARY_STATE_NONE) instead of CLIENT_CANARY_STATE_CANARY for the player canary state / player client version telemetry dimensions. Experiment gating logic itself is unchanged; only the reported canary classification differs.
+- **Internal build regeneration with no behavior change:** Every internal name and constant table in the player was regenerated for this build, long routines were moved between the obfuscator's indirection wrappers, and line wrapping shifted by a couple of dozen lines. All removed/added pairs describe the same logic (same flags, same DOM classes, same payload fields, same user-facing strings such as the seek-overlay announcements and "More videos"/"More shorts" labels), so this is a packaging difference with no behavior change.
+- **Feature-flag surface unchanged between the two builds:** The same experiment/killswitch identifiers appear on both sides of the diff (for example the ad-CPN macro fix, the unified-seek DTTs path, and the SSDAI abandon-ping flag), and the same player canary-state branches plus the ad/SSDAI, seek-overlay and suggested-video code paths exist in both. The canary-experiment build did not ship additional gated behavior that is missing here.
+
+### EXPERIMENT_FLAGS
+**Removed:**
+- `maw_error_screen_redesign`
+- `web_attributed_string_deep_equal_bugfix`
+- `web_enable_signed_in_chunk_prediction`
+- `web_live_chat_available_bugfix`
+- `wiz_experiment_ytd_preview_comment_feature`
+
+**Reappeared:**
+- `wiz_experiment_ytd_report_history_section_renderer`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-20 06:38:27 UTC
 
 ### Client version

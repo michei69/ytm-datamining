@@ -1055,7 +1055,8 @@
   "maw_error_screen_redesign": {
     "description": "Uses the redesigned error-screen layout in the interstitial view.",
     "requires_restart": true,
-    "family": "account/auth"
+    "family": "account/auth",
+    "removed": true
   },
   "maw_network_machine_raw_request": {
     "description": "Routes InnerTube requests through the network machine's raw-request path.",
@@ -1769,7 +1770,8 @@
   "web_attributed_string_deep_equal_bugfix": {
     "requires_restart": false,
     "family": "misc",
-    "description": "Uses a full deep-equality check when comparing attributed strings instead of only comparing content and run counts."
+    "description": "Uses a full deep-equality check when comparing attributed strings instead of only comparing content and run counts.",
+    "removed": true
   },
   "web_badge_shape_aria_hidden_killswitch": {
     "requires_restart": false,
@@ -2182,7 +2184,8 @@
   "web_live_chat_available_bugfix": {
     "requires_restart": false,
     "family": "telemetry/logging",
-    "description": "Starts the live chat engagement panel collapsed by default (bugfix for live chat availability)."
+    "description": "Starts the live chat engagement panel collapsed by default (bugfix for live chat availability).",
+    "removed": true
   },
   "web_lockup_view_model_compact_padding_update": {
     "description": "Applies the updated compact padding to lockups rendered in compact layout.",
@@ -3712,7 +3715,8 @@
   "web_enable_signed_in_chunk_prediction": {
     "description": "ytcfg experiment/config flag, enabled in this build, and it is also forwarded to the server in the serialized experiment-flag parameter string that accompanies requests. It governs 'chunk prediction' for signed-in users, i.e. speculative prediction/prefetch of the next content chunk based on a load-prediction model. No client module in this build reads the flag, so it is a server-side experiment/config flag: the prediction decision is made from the request context and the flag's effect is not observable as client-side UI or client-side code branching.",
     "requires_restart": false,
-    "family": "service-worker/caching"
+    "family": "service-worker/caching",
+    "removed": true
   },
   "html5_force_debug_data_for_client_tmp_logs": {
     "description": "When enabled, ad slot and layout client log payloads include extra debugData details such as slotId, layoutId and entry/fulfillment/expiration trigger data in adClientDataEntry slotData and layoutData; when disabled those debug fields are omitted.",
@@ -3811,8 +3815,7 @@
   "wiz_experiment_ytd_report_history_section_renderer": {
     "description": "Server-side experiment/config flag that gates the experimental ytd_report_history_section_renderer (a report-history section renderer) in the Wiz rendering framework. In this build it only appears as a boolean entry in the client's experiment-flags config delivered via ytcfg; there is no client-side code path, custom element, or renderer in the YouTube Music web client that reads it, so it is a server-side experiment/config flag with no observable client behavior.",
     "requires_restart": false,
-    "family": "experiments/config infra",
-    "removed": true
+    "family": "experiments/config infra"
   },
   "ab_mis_log_err": {
     "description": "A/B experiment measurement flag carried in the client's experiment-flag map (delivered both as a boolean in the experiment flags object and in the serialized experiment flags string). It belongs to the same 'ab_'-prefixed group of experiment-detection/measurement switches and, based on the trimmed flag name, governs whether errors encountered while logging/reporting A/B experiment assignments are surfaced. No client-side implementation consuming this key appears in the analyzed sources, so it exists only as server-assigned experiment/config configuration with no observable UI or playback behavior in the client.",
@@ -3838,7 +3841,8 @@
   "wiz_experiment_ytd_preview_comment_feature": {
     "description": "Server-side experiment/config flag delivered in the client's page config (ytcfg experiment flags) with a value of true in the observed runtime config. In this build no client code path reads this key: the only occurrence anywhere in the indexed client bundle is the entry in the serialized experiment-flag object, and searches for any flag-derived identifiers (preview_comment / previewComment / PREVIEW_COMMENT / CommentPreview, ytd_preview_comment_*) find nothing else. Comparable wiz_experiment_ytd_* keys are gated explicitly when used (for example the ghost/skeleton grid variant of the shared ytd renderers is registered only when its own ytd experiment key is enabled), so the absence of any lookup for this key means it has no observable effect on the current YouTube Music web client; whatever comment-preview gating it denotes must be handled server-side or in a build not shipped here.",
     "requires_restart": false,
-    "family": "experiments/config infra"
+    "family": "experiments/config infra",
+    "removed": true
   },
   "ab_net_tp_e": {
     "description": "Server-side experiment/config flag delivered through ytcfg's EXPERIMENT_FLAGS and serializedExperimentFlags. No client-side implementation or observable UI behavior for this flag is present in the indexed client source, so its behavior cannot be determined from the client code.",
