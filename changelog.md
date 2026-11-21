@@ -2,6 +2,17 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-21 18:56:14 UTC
+
+### EXPERIMENT_FLAGS
+**Removed:**
+- `ab_net_tp_e`
+
+**Reappeared:**
+- `wiz_experiment_ytd_preview_comment_feature`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-21 06:30:42 UTC
 
 ### Client version
