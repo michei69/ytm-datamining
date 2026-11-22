@@ -2,6 +2,16 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-22 05:58:51 UTC
+
+### EXPERIMENT_FLAGS
+**Removed:**
+- `ab_det_sb_lo`
+- `music_web_is_canary`
+- `wiz_experiment_ytd_list_item_view_model`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-21 18:56:14 UTC
 
 ### EXPERIMENT_FLAGS

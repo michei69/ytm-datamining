@@ -2654,7 +2654,8 @@
   "ab_det_sb_lo": {
     "requires_restart": false,
     "family": "misc",
-    "description": "Server-side experiment/config flag ab_det_sb_lo with only server-side configuration evidence; no occurrence was found in indexed client sources so no observable client behavior can be confirmed."
+    "description": "Server-side experiment/config flag ab_det_sb_lo with only server-side configuration evidence; no occurrence was found in indexed client sources so no observable client behavior can be confirmed.",
+    "removed": true
   },
   "action_companion_center_align_description": {
     "requires_restart": false,
@@ -3663,7 +3664,8 @@
   "music_web_is_canary": {
     "description": "Server-side experiment/config flag with no observable client behavior in this build: it does not appear anywhere in the indexed client scripts and is not present in the page config (its runtime value is undefined). No client code path reads it, so no UI, player, or navigation behavior can be attributed to it; any effect would be applied entirely by the server (e.g., which build or experiment treatment is served).",
     "requires_restart": false,
-    "family": "experiments/config infra"
+    "family": "experiments/config infra",
+    "removed": true
   },
   "music_web_is_canary_control": {
     "description": "Server-side experiment/config flag with no observable client behavior: it is not read anywhere in the indexed YouTube Music client scripts or the raw page config. Nothing in the client code consumes this value (the client derives its canary state separately, from the CLIENT_CANARY_STATE page config value and the client-version suffix, not from this flag), so no UI, playback, or request behavior can be attributed to it in this build.",
@@ -3836,7 +3838,8 @@
   "wiz_experiment_ytd_list_item_view_model": {
     "description": "Server-side experiment/config flag exposed only through the ytcfg EXPERIMENT_FLAGS map in the page bootstrap config (observed value true); it sits alongside other wiz_experiment_ytd_* entries that gate desktop (ytd) renderer experiments. No client code in this build reads this flag, so there is no observable client behavior to describe: it does not gate the yt-list-item-view-model component or any list item rendering path that could be confirmed from the shipped JavaScript. Its effect, if any, is applied by the server when deciding which renderer/view-model payloads to return.",
     "requires_restart": false,
-    "family": "experiments/config infra"
+    "family": "experiments/config infra",
+    "removed": true
   },
   "wiz_experiment_ytd_preview_comment_feature": {
     "description": "Server-side experiment/config flag delivered in the client's page config (ytcfg experiment flags) with a value of true in the observed runtime config. In this build no client code path reads this key: the only occurrence anywhere in the indexed client bundle is the entry in the serialized experiment-flag object, and searches for any flag-derived identifiers (preview_comment / previewComment / PREVIEW_COMMENT / CommentPreview, ytd_preview_comment_*) find nothing else. Comparable wiz_experiment_ytd_* keys are gated explicitly when used (for example the ghost/skeleton grid variant of the shared ytd renderers is registered only when its own ytd experiment key is enabled), so the absence of any lookup for this key means it has no observable effect on the current YouTube Music web client; whatever comment-preview gating it denotes must be handled server-side or in a build not shipped here.",
