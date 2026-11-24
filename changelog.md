@@ -2,6 +2,37 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-24 22:10:37 UTC
+
+### Client version
+- INNERTUBE_CLIENT_VERSION: `1.20261117.06.00` → `1.20261122.17.00`
+- PLAYER_CLIENT_VERSION: `1.20261117.10.00` → `1.20261122.05.00`
+
+**Summary:** The only substantive user-facing change is a new experiment-gated tonal styling for the top-level action buttons in the artist/profile header (with supporting styling support in the shared menu component). Everything else in this build is internal: newly inlined third-party library code in the player payload, re-allocated experiment gating IDs, and an updated player build stamp, with no other observable behavior differences found.
+
+**What changed:**
+- **Change 1:** A new experiment flag music_web_tonal_profile_header_buttons was added. The profile/visual header component now exposes a tonalButtons property bound to that flag and passes it down to the embedded menu component as the new tonal-top-level-buttons attribute. The menu component's button-style computation gained a third input so top-level buttons can be rendered in "tonal" style in addition to the existing filled/text/outline styles. When the flag is enabled, the header's top-level action buttons render with the tonal style; when disabled, rendering is unchanged.
+- **New third-party library code inlined into the player payload:** The player payload now carries additional third-party code that was not present in the previous build: an Angular-derived portion (Angular MIT license notice) and the Closure async sequence helper that previously shipped only with the app UI bundle. This is a payload/bundling change rather than an observable feature change.
+- **Experiment gating IDs re-allocated for several surfaces:** Several experiment/flag identifiers that gate component behavior were swapped for new IDs in this build: the thumbnail view model's flag moved from lhaDzf to LZbwQc, the sports match refinement gating flags moved from F8Naad/DlY4cf to glL4He/xdOLcf, and the carousel/gesture flags moved from SIgKDd/qSDD9d to uR8Fcd/iCiWrd. This is experiment-configuration churn: the same gated code paths now key off new experiment IDs, which re-randomizes those experiments. No user-visible behavior difference is attributable from these changes.
+- **Remaining differences are internal build churn:** Beyond the items above, the update republishes the same application logic and UI templates under a new internal naming/registration scheme (including the exported helper surface and DI token classes), while the gated feature set, screen structure, request/response handling, playback flow and user-facing strings are otherwise unchanged. No additional user-visible behavior change was identified in these regions.
+- **Player build stamp updated:** The player payload's embedded release identifier was bumped to the new build. This is a version stamp with no user-facing effect.
+
+### EXPERIMENT_FLAGS
+**Added:**
+- `web_omit_opener_on_new_window_navigation` — Experiment/config flag present in the client's ytcfg experiment payload. Its name indicates it governs whether navigating to a new window/tab omits the opener reference (so the destination cannot access window.opener), but no client-side implementation referencing this flag appears in the indexed sources; it is therefore a server-side experiment/config toggle with no confirmed observable client behavior. _(requires restart: no; family: navigation/routing)_
+
+**Removed:**
+- `mweb_fix_cinematic_fullscreen_leak`
+- `wiz_experiment_ytd_preview_comment_feature`
+
+**Reappeared:**
+- `ab_det_sb_lo`
+- `music_web_enable_station_ccv`
+- `music_web_is_canary_control`
+- `wiz_experiment_ytd_list_item_view_model`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-23 06:51:31 UTC
 
 ### EXPERIMENT_FLAGS
