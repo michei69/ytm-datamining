@@ -145,6 +145,9 @@ export function extractAssetUrls(html, cfg) {
   const polymerPatterns = [
     /<script[^>]+src=["']([^"']*music_polymer_inlined_html[^"']*\.js[^"']*)["']/i,
     /["']([^"']*music_polymer_inlined_html[^"']*\.js[^"']*)["']/i,
+    /<link[^>]*as=["']script["'][^>]*href=["']([^"']*\/s\/_\/[^"']+)["']/i,
+    /<link[^>]*href=["']([^"']*\/s\/_\/[^"']+)["'][^>]*as=["']script["']/i,
+    /["']([^"']*\/s\/_\/ytmusicweb\/[^"']+)["']/i,
   ];
   for (const pattern of polymerPatterns) {
     const match = html.match(pattern);
