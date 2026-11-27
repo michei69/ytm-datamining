@@ -184,8 +184,7 @@
   "disable_clicked_visual_element_in_command_handler": {
     "description": "Stops logging the clicked visual element from the command handler when no click-tracking parameters are present.",
     "requires_restart": false,
-    "family": "telemetry/logging",
-    "removed": true
+    "family": "telemetry/logging"
   },
   "disable_hidden_dom_if_using_stamper": {
     "requires_restart": false,
@@ -3805,7 +3804,8 @@
   "wiz_experiment_ytd_redeem_code_feature": {
     "description": "Server-provided experiment/config flag from the YouTube-desktop (ytd) 'wiz_experiment_ytd_*' experiment group, configured alongside other ytd renderer experiments (comments entry-point header renderer, page introduction renderer) and a redeem-code feature toggle. It appears only in the page's server-supplied experiment flag configuration; no shipped Music web bundle reads it, so it has no observable client-side behavior in this client and should be treated as a server-side experiment/config flag for a code-redemption feature with no client implementation in the evidence.",
     "requires_restart": false,
-    "family": "experiments/config infra"
+    "family": "experiments/config infra",
+    "removed": true
   },
   "web_renderer_stamper_skip_element_pool_for_cow": {
     "description": "Controls whether the Polymer renderer stamper skips the shared element pool for components that are CoW (client-side Wiz) web-component wrappers. When enabled, such custom elements are not returned to the reusable element pool when they are removed from a stamped list/container, so they are recreated fresh instead of being recycled and re-stamped; when disabled, they are pooled and reused like other custom elements. This affects DOM stamping/component reuse behavior (and thus recycled-element reuse counters) rather than any user-facing label or layout.",
@@ -3854,5 +3854,20 @@
     "description": "Experiment/config flag present in the client's ytcfg experiment payload. Its name indicates it governs whether navigating to a new window/tab omits the opener reference (so the destination cannot access window.opener), but no client-side implementation referencing this flag appears in the indexed sources; it is therefore a server-side experiment/config toggle with no confirmed observable client behavior.",
     "requires_restart": false,
     "family": "navigation/routing"
+  },
+  "music_web_enable_info_panel_details_popup_fix": {
+    "description": "Switches which element mapping is used to render the player's info-panel details popup. The info-panel details view model (infoPanelDetailsViewModel, the overlay surfaced from the player info panel that shows details about the current item) is by default treated as a shared renderer served under the generic yt prefix; with this flag enabled the popup resolver returns the ytmusic prefix for that view model instead, so the popup is rendered with the YouTube Music-specific element rather than the shared/generic one. Disabling it restores the default shared mapping, which is the behavior the fix was meant to correct.",
+    "requires_restart": true,
+    "family": "popup/dialog/menus"
+  },
+  "music_web_enable_mss_js": {
+    "description": "Server-side experiment/config flag only. It is delivered to the client in the page's ytcfg experiment-flags block (true in this build), but no client-side code in the shipped YouTube Music bundles reads it, so no UI element, request field, or user-visible behavior can be attributed to it. It appears to enable a backend-side streaming/manifest JavaScript capability rather than any observable client behavior.",
+    "requires_restart": false,
+    "family": "experiments/config infra"
+  },
+  "wiz_experiment_ytd_playlist_thumbnail_feature": {
+    "description": "Server-side WIZ experiment/config flag only. It is present in the page's ytcfg experiment-flags block (true in this build), but nothing in the YouTube Music client bundles gates on it, so no client-visible change such as different playlist thumbnail artwork or lockup treatment can be observed from this build; the playlist-thumbnail behavior it nominally covers is decided on the server for the experiment's treatment group.",
+    "requires_restart": false,
+    "family": "experiments/config infra"
   }
 }

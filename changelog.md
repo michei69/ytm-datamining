@@ -2,6 +2,34 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-27 21:07:49 UTC
+
+### Client version
+- INNERTUBE_CLIENT_VERSION: `1.20261122.17.00` → `1.20261124.13.00`
+- PLAYER_CLIENT_VERSION: `1.20261122.05.00` → `1.20261122.05.00` _(unchanged)_
+
+**Summary:** This build is a rebuild/re-minification of the YouTube Music Polymer bundle: identical application logic is now emitted as namespace-registered modules with per-module error isolation, driven by a compiled-in experiment-toggle bitmap, and developer error text was replaced by compact codes. No user-visible UI, playback, navigation, or network/API change was found (the player base.js is unchanged, still labelled youtube.player.web_20261122_05_RC00).
+
+**What changed:**
+- **Bundle restructured into namespace-registered modules with per-module error isolation:** The previous build was a single self-contained closure that also inlined an HTML import; the new build instead defines a shared global namespace object and wraps each module in its own try/catch that reports failures to a central dump handler, with explicit module-entry markers. Behavior is unchanged, but a failure in one module no longer aborts evaluation of the rest of the bundle. This is an internal packaging/loading change.
+- **Compiled-in experiment toggle bitmap initialization added:** The bundle now initializes a compiled-in feature-toggle bitmap on the global object at startup instead of relying solely on numeric toggle lookups. This is experiment-infrastructure plumbing (internal); no specific experiment behavior is observable from it.
+- **Runtime-injected global theme style block removed from the bundle:** The old build prepended an inlined HTML import that created a div with an "inlined-html" attribute and appended a `css-build-single` <style> element defining Material theme custom properties on `html:not(.style-scope)` to document.head. That bootstrap no longer exists in this file; the equivalent `html { --primary-text-color: ... }` variable block now ships inside a Polymer style template instead, so theming is unchanged for users. Internal build change.
+- **Developer error messages replaced with compact error codes:** Assertion/diagnostic errors in the web client bundle are now raised with short codes (for example the player-bar height parse failure and component assertion failures) instead of full English sentences, so error reporting/telemetry now carries codes rather than readable text. This affects logging detail only, not user-visible behavior.
+
+### EXPERIMENT_FLAGS
+**Added:**
+- `music_web_enable_info_panel_details_popup_fix` — Switches which element mapping is used to render the player's info-panel details popup. The info-panel details view model (infoPanelDetailsViewModel, the overlay surfaced from the player info panel that shows details about the current item) is by default treated as a shared renderer served under the generic yt prefix; with this flag enabled the popup resolver returns the ytmusic prefix for that view model instead, so the popup is rendered with the YouTube Music-specific element rather than the shared/generic one. Disabling it restores the default shared mapping, which is the behavior the fix was meant to correct. _(requires restart: yes; family: popup/dialog/menus)_
+- `music_web_enable_mss_js` — Server-side experiment/config flag only. It is delivered to the client in the page's ytcfg experiment-flags block (true in this build), but no client-side code in the shipped YouTube Music bundles reads it, so no UI element, request field, or user-visible behavior can be attributed to it. It appears to enable a backend-side streaming/manifest JavaScript capability rather than any observable client behavior. _(requires restart: no; family: experiments/config infra)_
+- `wiz_experiment_ytd_playlist_thumbnail_feature` — Server-side WIZ experiment/config flag only. It is present in the page's ytcfg experiment-flags block (true in this build), but nothing in the YouTube Music client bundles gates on it, so no client-visible change such as different playlist thumbnail artwork or lockup treatment can be observed from this build; the playlist-thumbnail behavior it nominally covers is decided on the server for the experiment's treatment group. _(requires restart: no; family: experiments/config infra)_
+
+**Removed:**
+- `wiz_experiment_ytd_redeem_code_feature`
+
+**Reappeared:**
+- `disable_clicked_visual_element_in_command_handler`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-24 22:10:37 UTC
 
 ### Client version
