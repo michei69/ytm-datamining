@@ -2,6 +2,21 @@
 
 Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
 
+## 2026-11-28 07:09:56 UTC
+
+### EXPERIMENT_FLAGS
+**Added:**
+- `music_web_enable_action_toast_timeout` — Controls whether action toasts (notification toasts that carry an action button, such as confirmation/undo snackbars) auto-dismiss on a timer. When enabled, an opened toast uses a 5-second display duration, and if the toast data includes an action button it also shows a close/dismiss button (aria-label "DISMISS") and closes itself when the action button is clicked; the toast is closed with the normal timed close path. When disabled, a toast with an action button gets a zero duration, so it does not time out on its own and stays until the user acts on it or dismisses it, and closing is requested in the no-timeout mode. The check is read from ytcfg at the moment a toast is opened or closed, so no page reload is required. _(requires restart: no; family: popup/dialog/menus)_
+- `web_fix_animated_icon_lazy_load_recursion` — Fixes recursive/repeated icon re-rendering for lazy-loaded animated (Lottie) icons. When an animated icon's animation data is not yet available, the client first draws the static fallback icon and then re-renders the icon once the lazy-loaded Lottie animation data is fetched. With this flag enabled, that follow-up re-render is skipped whenever the Lottie animationData and the cached animation resource path are still missing, so the icon stays on its static rendering instead of looping through repeated re-renders/re-fetches (which could recurse indefinitely). With the flag disabled, the icon is re-rendered unconditionally after the fetch attempt, allowing the recursion. The check runs at icon render time from ytcfg, so no page reload is required. _(requires restart: no; family: icons/typography/style)_
+
+**Removed:**
+- `ab_fk_sk_cl`
+- `music_web_enable_equalizer_now_playing_indicator`
+- `music_web_enable_npi_optimization`
+- `web_toast_to_snackbar_migration`
+
+Notable YouTube Music client-version and EXPERIMENT_FLAGS changes detected by this repository.
+
 ## 2026-11-27 21:07:49 UTC
 
 ### Client version
